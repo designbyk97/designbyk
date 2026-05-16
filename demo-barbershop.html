@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CROWN Barbershop – Düsseldorf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--black:#080809;--dark:#0f0f12;--card:#141416;--border:#1e1e22;--cream:#f0ece4;--warm:#c8b89a;--gold:#c8a830;--gold-dim:#6a5a18;--brown:#4a3018;--red:#8b1a1a;--white:#f5f2ee;--grey:#7a7a82;--dim:#3a3a42}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--white);font-family:'Lato',sans-serif;font-weight:300;overflow-x:hidden}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,9,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw}
+    .nav-logo{font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);text-decoration:none}
+    .nav-logo span{color:var(--gold)}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav-links a{font-size:12px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-cta{background:var(--gold)!important;color:var(--black)!important;padding:9px 20px;font-weight:700!important}
+    .nav-cta:hover{background:#d4b840!important}
+
+    #hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:100px 6vw 60px;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#080809 0%,#100c08 50%,#080809 100%)}
+    #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+
+    .hero-content{position:relative;z-index:2;max-width:600px}
+    .hero-tag{font-family:'Oswald',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:14px;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+    .hero-tag::before,.hero-tag::after{content:'';flex:0 0 24px;height:1px;background:var(--gold)}
+    .hero-title{font-family:'Oswald',sans-serif;font-size:clamp(64px,9vw,140px);font-weight:700;line-height:0.88;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);margin-bottom:24px;opacity:0;animation:fadeUp 0.8s 0.4s forwards}
+    .hero-title .gold{color:var(--gold);display:block}
+    .hero-sub{font-size:15px;line-height:1.8;color:var(--grey);max-width:460px;margin-bottom:40px;opacity:0;animation:fadeUp 0.8s 0.6s forwards}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.8s forwards}
+    .btn-gold-b{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--black);font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;padding:14px 32px;text-decoration:none;transition:background 0.2s,transform 0.15s}
+    .btn-gold-b:hover{background:#d4b840;transform:translateY(-2px)}
+    .btn-ghost-b{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);color:var(--grey);font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;padding:14px 32px;text-decoration:none;transition:all 0.2s}
+    .btn-ghost-b:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+    .hero-badge-row{display:flex;gap:2px;margin-top:52px;opacity:0;animation:fadeUp 0.8s 1s forwards}
+    .hbr{background:var(--card);border:1px solid var(--border);padding:16px 20px;text-align:center;flex:1}
+    .hbr-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:28px;color:var(--gold);line-height:1}
+    .hbr-label{font-size:10px;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px}
+
+    section{padding:100px 6vw}
+    .sec-tag{font-family:'Oswald',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px}
+    .sec-tag::before{content:'';width:20px;height:1px;background:var(--gold)}
+    .sec-title{font-family:'Oswald',sans-serif;font-size:clamp(44px,7vw,88px);font-weight:700;text-transform:uppercase;line-height:0.92;letter-spacing:0.03em;margin-bottom:16px}
+    .sec-title span{color:var(--gold)}
+    .sec-sub{font-size:14px;line-height:1.8;color:var(--grey);max-width:500px;margin-bottom:60px}
+
+    #preise{background:var(--dark)}
+    .preise-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+    .preise-left{}
+    .preise-list{display:flex;flex-direction:column;gap:0}
+    .preise-item{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--border);opacity:0;transform:translateX(-20px)}
+    .preise-item.visible{opacity:1;transform:translateX(0);transition:opacity 0.4s ease,transform 0.4s ease}
+    .pi-left{}
+    .pi-name{font-family:'Oswald',sans-serif;font-weight:600;font-size:18px;letter-spacing:0.04em;margin-bottom:4px}
+    .pi-desc{font-size:12px;color:var(--grey)}
+    .pi-time{font-size:11px;color:var(--dim);margin-top:2px}
+    .pi-price{font-family:'Oswald',sans-serif;font-weight:700;font-size:24px;color:var(--gold);white-space:nowrap;margin-left:20px}
+
+    .preise-right{}
+    .barber-card{background:var(--card);border:1px solid var(--border);overflow:hidden;margin-bottom:20px}
+    .bc-img{height:200px;position:relative}
+    #bc-canvas{width:100%;height:100%}
+    .bc-body{padding:20px}
+    .bc-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.04em;margin-bottom:4px}
+    .bc-role{font-size:11px;color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px}
+    .bc-desc{font-size:13px;color:var(--grey);line-height:1.65}
+    .bc-specs{display:flex;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+    .bc-spec{font-size:11px;color:var(--dim)}
+    .bc-spec span{color:var(--grey);display:block;font-weight:500;margin-bottom:2px}
+
+    #team-barber{background:var(--black)}
+    .team-barber-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px}
+    .tb-card{background:var(--card);border:1px solid var(--border);overflow:hidden;opacity:0;transform:translateY(20px)}
+    .tb-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .tb-img{height:140px;position:relative}
+    .tbc{width:100%;height:100%}
+    .tb-body{padding:16px}
+    .tb-name{font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;letter-spacing:0.04em;margin-bottom:2px}
+    .tb-spec{font-size:10px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+    .tb-exp{font-size:11px;color:var(--dim)}
+
+    #termin-barber{background:var(--dark)}
+    .termin-barber-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+    .tb-info h2{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(32px,5vw,68px);text-transform:uppercase;line-height:0.95;letter-spacing:0.03em;margin-bottom:16px}
+    .tb-info h2 span{color:var(--gold)}
+    .tb-info p{font-size:14px;line-height:1.8;color:var(--grey);margin-bottom:28px}
+    .tbi-detail{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:13px}
+    .tbi-icon{width:36px;height:36px;background:rgba(200,168,48,0.1);border:1px solid rgba(200,168,48,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .tbi-text strong{display:block;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px}
+    .tb-form{background:var(--card);border:1px solid var(--border);padding:36px}
+    .tbf-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold);margin-bottom:24px}
+    .fg{margin-bottom:16px}
+    .fg label{display:block;font-size:10px;font-weight:700;color:var(--grey);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:7px}
+    .fg input,.fg select{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--white);font-family:'Lato',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;border-radius:0}
+    .fg input:focus,.fg select:focus{border-color:var(--gold)}
+    .fg select option{background:var(--card)}
+    .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .btn-tb{width:100%;background:var(--gold);color:var(--black);border:none;font-family:'Oswald',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.15em;text-transform:uppercase;padding:16px;cursor:pointer;transition:background 0.2s;margin-top:8px}
+    .btn-tb:hover{background:#d4b840}
+    .tb-success{display:none;text-align:center;padding:40px}
+    .tb-success h4{font-family:'Oswald',sans-serif;font-weight:700;font-size:26px;text-transform:uppercase;color:var(--gold);letter-spacing:0.08em;margin-bottom:10px}
+    .tb-success p{font-size:13px;color:var(--grey)}
+
+    #reviews-barber{background:var(--black)}
+    .rb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
+    .rb-card{background:var(--card);border:1px solid var(--border);padding:28px;opacity:0;transform:translateY(20px)}
+    .rb-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .rb-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+    .rb-text{font-size:14px;line-height:1.7;color:var(--grey);margin-bottom:16px;font-style:italic}
+    .rb-author{display:flex;align-items:center;gap:10px}
+    .rb-av{width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--black);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:14px}
+    .rb-name{font-size:13px;font-weight:700;font-family:'Oswald',sans-serif;letter-spacing:0.04em}
+    .rb-date{font-size:11px;color:var(--dim);margin-top:2px}
+
+    footer{background:var(--dark);border-top:1px solid var(--border);padding:48px 6vw 28px}
+    .ft{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:60px;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border)}
+    .f-logo{font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);margin-bottom:10px}
+    .f-logo span{color:var(--gold)}
+    .f-desc{font-size:12px;color:var(--dim);line-height:1.7}
+    .f-col-title{font-family:'Oswald',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+    .f-col a,.f-col p{display:block;font-size:12px;color:var(--dim);text-decoration:none;margin-bottom:7px;transition:color 0.2s}
+    .f-col a:hover{color:var(--gold)}
+    .f-bottom{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);flex-wrap:wrap;gap:10px}
+
+    @media(max-width:900px){.preise-wrap{grid-template-columns:1fr}.team-barber-grid{grid-template-columns:1fr 1fr}.termin-barber-wrap{grid-template-columns:1fr;gap:40px}.rb-grid{grid-template-columns:1fr}.ft{grid-template-columns:1fr;gap:28px}nav .nav-links{display:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">CROWN<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#preise">Preise</a></li>
+    <li><a href="#team-barber">Team</a></li>
+    <li><a href="#reviews-barber">Reviews</a></li>
+    <li><a href="#termin-barber" class="nav-cta">Termin buchen</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag">Premium Barbershop · Düsseldorf</div>
+    <h1 class="hero-title">YOUR<br>CROWN<span class="gold">AWAITS.</span></h1>
+    <p class="hero-sub">CROWN ist kein gewöhnlicher Friseur. Wir sind ein Erlebnis – für Männer die wissen, dass ein perfekter Haarschnitt kein Luxus ist, sondern Standard.</p>
+    <div class="hero-btns">
+      <a href="#termin-barber" class="btn-gold-b">Termin buchen →</a>
+      <a href="#preise" class="btn-ghost-b">Unsere Services</a>
+    </div>
+    <div class="hero-badge-row">
+      <div class="hbr"><div class="hbr-num">4.9★</div><div class="hbr-label">Google Rating</div></div>
+      <div class="hbr"><div class="hbr-num">8+</div><div class="hbr-label">Jahre Erfahrung</div></div>
+      <div class="hbr"><div class="hbr-num">1.200+</div><div class="hbr-label">Stammkunden</div></div>
+      <div class="hbr"><div class="hbr-num">6</div><div class="hbr-label">Master Barber</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="preise">
+  <div class="preise-wrap">
+    <div class="preise-left">
+      <div class="sec-tag">Unsere Services</div>
+      <h2 class="sec-title">PREISE &amp;<br><span>SERVICES</span></h2>
+      <p class="sec-sub">Transparente Preise. Kein Verstecktes. Kein Bullshit.</p>
+      <div class="preise-list">
+        <div class="preise-item"><div class="pi-left"><div class="pi-name">Classic Cut</div><div class="pi-desc">Haarschnitt inkl. Waschen & Styling</div><div class="pi-time">⏱ 45 Min</div></div><div class="pi-price">28 €</div></div>
+        <div class="preise-item"><div class="pi-left"><div class="pi-name">Beard Trim</div><div class="pi-desc">Bartpflege & Konturierung</div><div class="pi-time">⏱ 20 Min</div></div><div class="pi-price">18 €</div></div>
+        <div class="preise-item"><div class="pi-left"><div class="pi-name">Cut + Beard</div><div class="pi-desc">Haarschnitt & Bart – das Komplettpaket</div><div class="pi-time">⏱ 60 Min</div></div><div class="pi-price">42 €</div></div>
+        <div class="preise-item"><div class="pi-left"><div class="pi-name">Royal Shave</div><div class="pi-desc">Klassische Nassrasur mit heißem Handtuch</div><div class="pi-time">⏱ 30 Min</div></div><div class="pi-price">35 €</div></div>
+        <div class="preise-item"><div class="pi-left"><div class="pi-name">Kids Cut</div><div class="pi-desc">Haarschnitt für Jungs bis 12 Jahre</div><div class="pi-time">⏱ 30 Min</div></div><div class="pi-price">20 €</div></div>
+        <div class="preise-item"><div class="pi-left"><div class="pi-name">VIP Package</div><div class="pi-desc">Cut + Beard + Royal Shave + Kopfmassage</div><div class="pi-time">⏱ 90 Min</div></div><div class="pi-price">75 €</div></div>
+      </div>
+    </div>
+    <div class="preise-right">
+      <div class="barber-card">
+        <div class="bc-img"><canvas id="bc-canvas"></canvas></div>
+        <div class="bc-body">
+          <div class="bc-name">Ahmed Al-Hassan</div>
+          <div class="bc-role">Head Barber & Inhaber</div>
+          <p class="bc-desc">15 Jahre Erfahrung, ausgebildet in London und Dubai. Spezialist für Fades, Skin Fades und klassische Herrenformen.</p>
+          <div class="bc-specs">
+            <div class="bc-spec"><span>Spezialität</span>Skin Fade</div>
+            <div class="bc-spec"><span>Seit</span>2016 bei CROWN</div>
+            <div class="bc-spec"><span>Sprachen</span>DE · EN · AR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team-barber">
+  <div class="sec-tag">Das Team</div>
+  <h2 class="sec-title">UNSERE<br><span>BARBER</span></h2>
+  <div class="team-barber-grid">
+    <div class="tb-card"><div class="tb-img"><canvas class="tbc" id="tbc1"></canvas></div><div class="tb-body"><div class="tb-name">AHMED AL-HASSAN</div><div class="tb-spec">Head Barber</div><p class="tb-exp">15 Jahre · Skin Fades · London & Dubai</p></div></div>
+    <div class="tb-card"><div class="tb-img"><canvas class="tbc" id="tbc2"></canvas></div><div class="tb-body"><div class="tb-name">KEVIN OKAFOR</div><div class="tb-spec">Senior Barber</div><p class="tb-exp">8 Jahre · Classic Cuts · Afro Textures</p></div></div>
+    <div class="tb-card"><div class="tb-img"><canvas class="tbc" id="tbc3"></canvas></div><div class="tb-body"><div class="tb-name">MARCO ESPOSITO</div><div class="tb-spec">Master Barber</div><p class="tb-exp">10 Jahre · Italian Classics · Beard Design</p></div></div>
+    <div class="tb-card"><div class="tb-img"><canvas class="tbc" id="tbc4"></canvas></div><div class="tb-body"><div class="tb-name">TIM SCHNEIDER</div><div class="tb-spec">Barber</div><p class="tb-exp">5 Jahre · Modern Styles · Hair Tattoos</p></div></div>
+  </div>
+</section>
+
+<section id="reviews-barber">
+  <div class="sec-tag">Was Kunden sagen</div>
+  <h2 class="sec-title">REVIEWS</h2>
+  <div class="rb-grid">
+    <div class="rb-card"><div class="rb-stars">★★★★★</div><p class="rb-text">"Bester Barbershop in Düsseldorf – kein Diskussion. Ahmed macht den krassesten Fade den ich je hatte."</p><div class="rb-author"><div class="rb-av">J</div><div><div class="rb-name">JAMAL K.</div><div class="rb-date">Google · vor 4 Tagen</div></div></div></div>
+    <div class="rb-card"><div class="rb-stars">★★★★★</div><p class="rb-text">"VIP Package ist sein Geld absolut wert. Kopfmassage, Royal Shave – ich kam rein wie ein Mensch und kam raus wie ein King."</p><div class="rb-author"><div class="rb-av">M</div><div><div class="rb-name">MARC T.</div><div class="rb-date">Google · vor 1 Woche</div></div></div></div>
+    <div class="rb-card"><div class="rb-stars">★★★★★</div><p class="rb-text">"Seit 3 Jahren mein Stammbarber. Die Atmosphäre ist top, das Team ist professionell und der Preis stimmt."</p><div class="rb-author"><div class="rb-av">A</div><div><div class="rb-name">ALEXIS D.</div><div class="rb-date">Google · vor 2 Wochen</div></div></div></div>
+  </div>
+</section>
+
+<section id="termin-barber">
+  <div class="termin-barber-wrap">
+    <div class="tb-info">
+      <div class="sec-tag">Online Booking</div>
+      <h2>TERMIN<br><span>BUCHEN</span></h2>
+      <p>Kein Warten. Kein Anrufen. Buche deinen Termin online in 60 Sekunden – und dein Stuhl ist reserviert.</p>
+      <div class="tbi-detail"><div class="tbi-icon">📍</div><div class="tbi-text"><strong>Adresse</strong><span>Friedrichstr. 22, 40217 Düsseldorf</span></div></div>
+      <div class="tbi-detail"><div class="tbi-icon">📞</div><div class="tbi-text"><strong>Telefon</strong><span>0211 / 777 888 99</span></div></div>
+      <div class="tbi-detail"><div class="tbi-icon">🕐</div><div class="tbi-text"><strong>Öffnungszeiten</strong><span>Di–Sa: 10:00–20:00 · So: 12:00–17:00</span></div></div>
+    </div>
+    <div class="tb-form">
+      <div class="tbf-title">TERMIN BUCHEN</div>
+      <div id="tb-fields">
+        <div class="fg-row">
+          <div class="fg"><label>Vorname</label><input type="text" placeholder="Max"/></div>
+          <div class="fg"><label>Nachname</label><input type="text" placeholder="Mustermann"/></div>
+        </div>
+        <div class="fg"><label>Service</label><select><option>Classic Cut – 28 €</option><option>Beard Trim – 18 €</option><option>Cut + Beard – 42 €</option><option>Royal Shave – 35 €</option><option>Kids Cut – 20 €</option><option>VIP Package – 75 €</option></select></div>
+        <div class="fg"><label>Barber</label><select><option>Keine Präferenz</option><option>Ahmed Al-Hassan</option><option>Kevin Okafor</option><option>Marco Esposito</option><option>Tim Schneider</option></select></div>
+        <div class="fg-row">
+          <div class="fg"><label>Datum</label><input type="date"/></div>
+          <div class="fg"><label>Uhrzeit</label><select><option>10:00 Uhr</option><option>11:00 Uhr</option><option>12:00 Uhr</option><option>13:00 Uhr</option><option>14:00 Uhr</option><option>15:00 Uhr</option><option>16:00 Uhr</option><option>17:00 Uhr</option><option>18:00 Uhr</option><option>19:00 Uhr</option></select></div>
+        </div>
+        <div class="fg"><label>Telefon</label><input type="tel" placeholder="0211 ..."/></div>
+        <button class="btn-tb" onclick="document.getElementById('tb-fields').style.display='none';document.querySelector('.tb-success').style.display='block'">TERMIN BUCHEN →</button>
+      </div>
+      <div class="tb-success"><h4>BOOKED! ✂️</h4><p>Dein Termin ist bestätigt. Wir sehen uns bei CROWN!</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div><div class="f-logo">CROWN<span>.</span></div><p class="f-desc">Premium Barbershop Düsseldorf · Friedrichstr. 22 · Kein Termin? Walk-ins willkommen!</p></div>
+    <div class="f-col"><div class="f-col-title">Services</div><a href="#">Classic Cut</a><a href="#">Beard Trim</a><a href="#">Royal Shave</a><a href="#">VIP Package</a></div>
+    <div class="f-col"><div class="f-col-title">Kontakt</div><p>Friedrichstr. 22, Düsseldorf</p><a href="#">0211 / 777 888 99</a><a href="#">info@crown-barber.de</a></div>
+  </div>
+  <div class="f-bottom"><span>© 2025 CROWN Barbershop Düsseldorf</span><span style="color:var(--border);font-size:10px">Website by KL Web Design</span></div>
+</footer>
+
+<script>
+// Hero canvas
+(function(){
+  const c=document.getElementById('hero-canvas');if(!c)return;
+  const ctx=c.getContext('2d');let W,H,t=0;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const pts=[];for(let i=0;i<50;i++)pts.push({x:Math.random(),y:Math.random(),vx:(Math.random()-0.5)*0.0002,vy:(Math.random()-0.5)*0.0002,r:Math.random()*1.5+0.3,a:Math.random()*0.2+0.05});
+  function frame(){
+    t+=0.007;ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#080809');bg.addColorStop(1,'#100c08');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    // Scissors pattern
+    ctx.save();ctx.globalAlpha=0.03;ctx.strokeStyle='#c8a830';ctx.lineWidth=1;
+    for(let i=0;i<6;i++){const x=W*(0.15+i*0.15);const y=H*0.5+Math.sin(t*0.3+i)*H*0.1;ctx.save();ctx.translate(x,y);ctx.rotate(t*0.05+i);ctx.beginPath();ctx.moveTo(-15,0);ctx.lineTo(15,0);ctx.moveTo(0,-15);ctx.lineTo(0,15);ctx.stroke();ctx.restore()}
+    ctx.restore();
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=1;if(p.x>1)p.x=0;if(p.y<0)p.y=1;if(p.y>1)p.y=0;ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,168,48,${p.a})`;ctx.fill()});
+    requestAnimationFrame(frame);}
+  frame();
+})();
+
+// Barber/team canvases
+const barberColors=[['#1a0808','#2a1010'],['#081a08','#102a10'],['#080818','#101028'],['#181208','#281a08']];
+['bc-canvas','tbc1','tbc2','tbc3','tbc4'].forEach((id,idx)=>{
+  const c=document.getElementById(id);if(!c)return;
+  const ctx=c.getContext('2d');let t=Math.random()*10;const cols=barberColors[idx%4];
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}resize();window.addEventListener('resize',resize);
+  function frame(){t+=0.005;const W=c.width,H=c.height,cx=W/2,cy=H/2;ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,W,H);bg.addColorStop(0,cols[0]);bg.addColorStop(1,cols[1]);ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    ctx.save();ctx.globalAlpha=0.08;ctx.strokeStyle='#c8a830';ctx.lineWidth=1;
+    for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(cx,cy,30+i*25+Math.sin(t+i)*5,0,Math.PI*2);ctx.stroke()}
+    ctx.restore();requestAnimationFrame(frame);}
+  frame();
+});
+
+// Preise items reveal
+const preiseItems=document.querySelectorAll('.preise-item');
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),(e.target.dataset.i||0)*100)})},{threshold:0.1});
+preiseItems.forEach((el,i)=>{el.dataset.i=i;io.observe(el)});
+
+const revealEls=document.querySelectorAll('.tb-card,.rb-card');
+const io2=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),(e.target.dataset.i||0)*80)})},{threshold:0.1});
+revealEls.forEach((el,i)=>{el.dataset.i=i%5;io2.observe(el)});
+</script>
+</body>
+</html>

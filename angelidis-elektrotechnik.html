@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angelidis Elektrotechnik GmbH – Meisterbetrieb Düsseldorf</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gelb: #F5B800;
+    --schwarz: #0f0f0f;
+    --dunkel: #1a1a1a;
+    --grau: #2a2a2a;
+    --hellgrau: #f5f5f5;
+    --weiss: #ffffff;
+    --text-grau: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--schwarz);
+    color: var(--weiss);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(15,15,15,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gelb);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .nav-logo-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--gelb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--schwarz);
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+  }
+
+  .nav-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-name span {
+    display: block;
+    color: var(--gelb);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--weiss);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gelb); }
+
+  .nav-cta {
+    background: var(--gelb);
+    color: var(--schwarz) !important;
+    padding: 10px 22px;
+    font-weight: 700 !important;
+  }
+
+  .nav-cta:hover { background: #e0a800; color: var(--schwarz) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 100px 40px 60px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(135deg, rgba(245,184,0,0.08) 0%, transparent 50%),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 40px,
+        rgba(245,184,0,0.02) 40px,
+        rgba(245,184,0,0.02) 41px
+      );
+  }
+
+  .hero-bolt {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 500px;
+    opacity: 0.04;
+    color: var(--gelb);
+    line-height: 1;
+    pointer-events: none;
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.04; }
+    50% { opacity: 0.07; }
+  }
+
+  .hero-content {
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245,184,0,0.12);
+    border: 1px solid rgba(245,184,0,0.3);
+    color: var(--gelb);
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gelb);
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(52px, 8vw, 100px);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gelb);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-grau);
+    margin: 24px 0 40px;
+    line-height: 1.7;
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gelb);
+    color: var(--schwarz);
+    padding: 16px 32px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--weiss);
+    padding: 16px 32px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gelb);
+    color: var(--gelb);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .hero-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: var(--gelb);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--text-grau);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* KONTAKT-BAR */
+  .contact-bar {
+    background: var(--gelb);
+    padding: 14px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .contact-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--schwarz);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .contact-bar-item svg { flex-shrink: 0; }
+
+  /* SECTION STYLES */
+  section { padding: 100px 40px; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gelb);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 32px;
+    height: 2px;
+    background: var(--gelb);
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 16px;
+  }
+
+  .section-title em {
+    font-style: normal;
+    color: var(--gelb);
+  }
+
+  .section-desc {
+    color: var(--text-grau);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 500px;
+    font-weight: 300;
+  }
+
+  .max-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* LEISTUNGEN */
+  #leistungen { background: var(--dunkel); }
+
+  .leistungen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .leistungen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+  }
+
+  .leistung-card {
+    background: var(--grau);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: default;
+  }
+
+  .leistung-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--gelb);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .leistung-card:hover::before { transform: scaleX(1); }
+  .leistung-card:hover { transform: translateY(-4px); }
+
+  .leistung-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .leistung-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .leistung-desc {
+    color: var(--text-grau);
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* BEWERTUNGEN */
+  #bewertungen { background: var(--schwarz); }
+
+  .bewertungen-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .stars-big {
+    font-size: 32px;
+    letter-spacing: 4px;
+    margin: 12px 0 8px;
+  }
+
+  .rating-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--text-grau);
+    font-size: 14px;
+  }
+
+  .rating-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: var(--gelb);
+  }
+
+  .bewertungen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .bewertung-card {
+    background: var(--dunkel);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 28px;
+    position: relative;
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .bewertung-card:nth-child(1) { animation-delay: 0.1s; }
+  .bewertung-card:nth-child(2) { animation-delay: 0.2s; }
+  .bewertung-card:nth-child(3) { animation-delay: 0.3s; }
+  .bewertung-card:nth-child(4) { animation-delay: 0.4s; }
+  .bewertung-card:nth-child(5) { animation-delay: 0.5s; }
+  .bewertung-card:nth-child(6) { animation-delay: 0.6s; }
+
+  .bewertung-quote {
+    font-size: 48px;
+    color: var(--gelb);
+    line-height: 0.6;
+    margin-bottom: 16px;
+    font-family: Georgia, serif;
+    opacity: 0.6;
+  }
+
+  .bewertung-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .bewertung-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bewertung-name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .bewertung-stars {
+    color: var(--gelb);
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .google-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245,184,0,0.1);
+    border: 1px solid rgba(245,184,0,0.2);
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--gelb);
+    margin-top: 40px;
+    font-weight: 500;
+  }
+
+  /* FORMULARE */
+  #kontakt { background: var(--dunkel); }
+
+  .forms-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  @media (max-width: 768px) {
+    .forms-container { grid-template-columns: 1fr; }
+  }
+
+  .form-box {
+    background: var(--grau);
+    padding: 40px 36px;
+  }
+
+  .form-box-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .form-box-sub {
+    color: var(--text-grau);
+    font-size: 13px;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-grau);
+    margin-bottom: 8px;
+  }
+
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    background: var(--schwarz);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--weiss);
+    padding: 14px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    outline: none;
+    appearance: none;
+  }
+
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--gelb);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--gelb);
+    color: var(--schwarz);
+    border: none;
+    padding: 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+  }
+
+  .form-success {
+    display: none;
+    background: rgba(245,184,0,0.1);
+    border: 1px solid rgba(245,184,0,0.3);
+    color: var(--gelb);
+    padding: 16px;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  /* CHATBOT */
+  .chatbot-bubble {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+  }
+
+  .chatbot-toggle {
+    width: 62px;
+    height: 62px;
+    background: var(--gelb);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 8px 32px rgba(245,184,0,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    clip-path: polygon(15% 0%, 85% 0%, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0% 85%, 0% 15%);
+  }
+
+  .chatbot-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 40px rgba(245,184,0,0.5);
+  }
+
+  .chatbot-window {
+    display: none;
+    position: absolute;
+    bottom: 76px;
+    right: 0;
+    width: 360px;
+    background: var(--dunkel);
+    border: 1px solid rgba(245,184,0,0.25);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .chatbot-window.open { display: flex; }
+
+  .chatbot-header {
+    background: var(--gelb);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--schwarz);
+  }
+
+  .chatbot-avatar {
+    width: 36px;
+    height: 36px;
+    background: var(--schwarz);
+    color: var(--gelb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .chatbot-header-info strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+  }
+
+  .chatbot-header-info span {
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .chatbot-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .chatbot-messages::-webkit-scrollbar { width: 4px; }
+  .chatbot-messages::-webkit-scrollbar-track { background: transparent; }
+  .chatbot-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+
+  .msg {
+    max-width: 85%;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    animation: fadeUp 0.3s ease forwards;
+  }
+
+  .msg-bot {
+    background: var(--grau);
+    color: var(--weiss);
+    align-self: flex-start;
+    border-radius: 0 12px 12px 12px;
+  }
+
+  .msg-user {
+    background: var(--gelb);
+    color: var(--schwarz);
+    align-self: flex-end;
+    border-radius: 12px 0 12px 12px;
+    font-weight: 500;
+  }
+
+  .chatbot-suggestions {
+    padding: 0 20px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .suggestion-btn {
+    background: rgba(245,184,0,0.1);
+    border: 1px solid rgba(245,184,0,0.25);
+    color: var(--gelb);
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: 'Barlow', sans-serif;
+    transition: background 0.2s;
+    text-align: left;
+  }
+
+  .suggestion-btn:hover { background: rgba(245,184,0,0.2); }
+
+  .chatbot-input-row {
+    display: flex;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .chatbot-input {
+    flex: 1;
+    background: var(--schwarz);
+    border: none;
+    color: var(--weiss);
+    padding: 14px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    outline: none;
+  }
+
+  .chatbot-input::placeholder { color: var(--text-grau); }
+
+  .chatbot-send {
+    background: var(--gelb);
+    border: none;
+    color: var(--schwarz);
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+  }
+
+  .chatbot-send:hover { background: #e0a800; }
+
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--grau);
+    align-self: flex-start;
+    border-radius: 0 12px 12px 12px;
+  }
+
+  .typing-dot {
+    width: 6px; height: 6px;
+    background: var(--text-grau);
+    border-radius: 50%;
+    animation: typing 1.2s infinite;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* FOOTER */
+  footer {
+    background: #080808;
+    border-top: 2px solid rgba(245,184,0,0.2);
+    padding: 48px 40px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand .nav-name {
+    font-size: 18px;
+  }
+
+  .footer-info {
+    color: var(--text-grau);
+    font-size: 13px;
+    margin-top: 12px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .footer-info a {
+    color: var(--gelb);
+    text-decoration: none;
+  }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-grau);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    section { padding: 70px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-stats { gap: 24px; }
+    .contact-bar { padding: 12px 20px; gap: 20px; }
+    footer { padding: 40px 20px 24px; }
+  }
+
+  /* Scroll animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">AE</div>
+    <div class="nav-name">
+      Angelidis Elektrotechnik
+      <span>Meisterbetrieb · Düsseldorf</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#bewertungen">Bewertungen</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="#kontakt" class="nav-cta">Anfrage senden</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bolt">⚡</div>
+  <div class="hero-content max-container">
+    <div class="hero-badge">Meisterbetrieb · Düsseldorf seit 2008</div>
+    <h1>
+      Strom &
+      <em>Sicherheit</em>
+      aus einer Hand.
+    </h1>
+    <p class="hero-sub">
+      Elektroanlagen, Smarthome, Sprechanlagen, erneuerbare Energie — 
+      professionell und zuverlässig. Ihr Meisterbetrieb in Düsseldorf und Umgebung.
+    </p>
+    <div class="hero-buttons">
+      <a href="#kontakt" class="btn-primary">⚡ Jetzt anfragen</a>
+      <a href="tel:02115808711" class="btn-outline">📞 0211 580 87 111</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">4,9★</div>
+        <div class="hero-stat-label">Google Bewertung</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">15+</div>
+        <div class="hero-stat-label">Jahre Erfahrung</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">24h</div>
+        <div class="hero-stat-label">Notdienst</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT BAR -->
+<div class="contact-bar">
+  <a href="tel:02115808711" class="contact-bar-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81A16 16 0 0 0 15.19 16l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    0211 580 87 111
+  </a>
+  <a href="mailto:info@ae-elektrotechnik.com" class="contact-bar-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    info@ae-elektrotechnik.com
+  </a>
+  <a href="#" class="contact-bar-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+    Mo–Fr 7:00–18:00 · Notdienst 24/7
+  </a>
+</div>
+
+<!-- LEISTUNGEN -->
+<section id="leistungen">
+  <div class="max-container">
+    <div class="leistungen-header">
+      <div>
+        <div class="section-label">Was wir machen</div>
+        <div class="section-title">Unsere<br><em>Leistungen</em></div>
+      </div>
+      <p class="section-desc">Als zertifizierter Meisterbetrieb bieten wir das komplette Spektrum der Elektrotechnik — sauber, sicher, termingerecht.</p>
+    </div>
+    <div class="leistungen-grid reveal">
+      <div class="leistung-card">
+        <div class="leistung-icon">⚡</div>
+        <div class="leistung-title">Elektroanlagen</div>
+        <div class="leistung-desc">Installation, Wartung und Reparatur aller elektrischen Anlagen — vom Einfamilienhaus bis zum Gewerbeobjekt.</div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-icon">🔔</div>
+        <div class="leistung-title">Sprechanlagen</div>
+        <div class="leistung-desc">Montage und Austausch moderner Sprechanlagen und Türöffner. Analog oder IP-basiert.</div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-icon">🏠</div>
+        <div class="leistung-title">Smart Home</div>
+        <div class="leistung-desc">Intelligente Steuerung von Licht, Heizung und Sicherheitstechnik. KNX, WLAN und mehr.</div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-icon">☀️</div>
+        <div class="leistung-title">Erneuerbare Energie</div>
+        <div class="leistung-desc">Photovoltaikanlagen, Wallboxen für E-Autos und Energiespeichersysteme vom Profi.</div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-icon">🛡️</div>
+        <div class="leistung-title">Sicherheitstechnik</div>
+        <div class="leistung-desc">Alarmanlangen, Videoüberwachung und Zugangskontrolle für Privat und Gewerbe.</div>
+      </div>
+      <div class="leistung-card">
+        <div class="leistung-icon">🎓</div>
+        <div class="leistung-title">Ausbildungsbetrieb</div>
+        <div class="leistung-desc">Wir bilden aus — qualifizierte Elektrofachkräfte für die Zukunft. Bewerbungen willkommen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEWERTUNGEN -->
+<section id="bewertungen">
+  <div class="max-container">
+    <div class="bewertungen-header reveal">
+      <div class="section-label" style="justify-content:center">Google Bewertungen</div>
+      <div class="rating-line">
+        <span class="rating-num">4,9</span>
+        <div>
+          <div class="stars-big">★★★★★</div>
+          <div style="color:var(--text-grau);font-size:13px;">Basierend auf Google Bewertungen</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:16px;">
+        <div class="google-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#F5B800" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#F5B800" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#F5B800" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#F5B800" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Verifizierte Google-Bewertungen
+        </div>
+      </div>
+    </div>
+    <div class="bewertungen-grid">
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Ich bin absolut zufrieden mit der Arbeit! Der Elektriker war pünktlich, freundlich und sehr professionell. Alle Arbeiten wurden sauber und zuverlässig erledigt, von der ersten Beratung bis zur finalen Abnahme.</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">Habusk Agirman</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Ich bin rundum zufrieden mit Angelidis Elektrotechnik! Vom ersten Kontakt bis zur fertigen Arbeit lief alles reibungslos. Super freundlich, pünktlich und man merkt sofort, dass hier mit echter Fachkenntnis gearbeitet wird. Klare Weiterempfehlung!</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">Patrick Stau</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Ich bin absolut zufrieden mit dem Service! Der Elektriker war pünktlich, freundlich und hat sehr sauber gearbeitet. Er hat bei mir das komplette Haus mit neuen Steckdosen und Lichtschaltern ausgestattet sowie eine defekte Leitung repariert.</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">Renz Tahir</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">24/7 parat — schnelle Hilfe geleistet. Sicherung war durchgebrannt, Hilfe kam in 20 Minuten. Umtausch erfolgreich und günstiger als die meisten anderen Anbieter. Nur empfehlenswert!</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">Berke-Fatih Yeni</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Angelidis Elektrotechnik hat bei uns elektrische Anlagen auf höchstem Niveau geplant, installiert und gewartet. Kenntnisse sind herausragend, arbeitet stets präzise, zuverlässig und ist auch unter Druck jederzeit belastbar.</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">Melih Aren</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Super Arbeit geleistet — musste neue Lampen anbringen lassen und LED-Leuchten. Die Arbeit wurde super schnell erledigt, die Elektronik funktioniert und ich bin sehr zufrieden. Auch mit dem Preis. Danke schön!</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">calogero Sageichnicht</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Sehr zuverlässiger und professioneller Service! Angelidis Elektrotechnik hat schnell und sauber gearbeitet, war pünktlich vor Ort und hat transparent beraten. Klare Weiterempfehlung!</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">calogero S.</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Ich bin wirklich sehr zufrieden mit der Arbeit. Die Kommunikation war sehr schnell und zuverlässig. Termine wurden eingehalten und die Arbeiten sehr ordentlich ausgeführt.</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">Draga Dzelov</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="bewertung-card">
+        <div class="bewertung-quote">"</div>
+        <div class="bewertung-text">Ich bin äußerst zufrieden mit der Arbeit der Elektromeister-Firma. Vom ersten Kontakt bis zur finalen Abnahme lief alles reibungslos und sehr professionell. Die Beratung war kompetent, ehrlich und auf meine individuellen Bedürfnisse zugeschnitten.</div>
+        <div class="bewertung-footer">
+          <div class="bewertung-name">D N</div>
+          <div class="bewertung-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT & BEWERBUNG -->
+<section id="kontakt">
+  <div class="max-container">
+    <div class="reveal">
+      <div class="section-label">Direkt anfragen</div>
+      <div class="section-title">Schreib<br><em>uns an.</em></div>
+      <p class="section-desc" style="margin-bottom:0">Kontaktanfrage oder Bewerbung — wir melden uns innerhalb von 24 Stunden.</p>
+    </div>
+    <div class="forms-container reveal">
+      <!-- KONTAKTFORMULAR -->
+      <div class="form-box">
+        <div class="form-box-title">📋 Kontaktanfrage</div>
+        <div class="form-box-sub">Kostenlose Beratung · Kein Stress · Schnelle Antwort</div>
+        <div class="form-group">
+          <label class="form-label">Name *</label>
+          <input type="text" class="form-input" placeholder="Ihr vollständiger Name" id="k-name">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Telefon</label>
+            <input type="tel" class="form-input" placeholder="0211 ..." id="k-tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-Mail *</label>
+            <input type="email" class="form-input" placeholder="ihre@email.de" id="k-email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Leistung</label>
+          <select class="form-select form-input" id="k-service">
+            <option value="">Bitte wählen...</option>
+            <option>Elektroanlagen / Installation</option>
+            <option>Sprechanlage</option>
+            <option>Sicherungskasten</option>
+            <option>Smart Home</option>
+            <option>PV-Anlage / Wallbox</option>
+            <option>Notdienst</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nachricht *</label>
+          <textarea class="form-textarea" placeholder="Beschreiben Sie kurz Ihr Anliegen..." id="k-msg"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitKontakt()">⚡ Anfrage absenden</button>
+        <div class="form-success" id="k-success">✅ Danke! Wir melden uns innerhalb von 24 Stunden.</div>
+      </div>
+
+      <!-- BEWERBUNGSFORMULAR -->
+      <div class="form-box">
+        <div class="form-box-title">🎓 Jetzt bewerben</div>
+        <div class="form-box-sub">Ausbildung · Gesellenstelle · Meisterstelle — alle Levels willkommen</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Vorname *</label>
+            <input type="text" class="form-input" placeholder="Vorname" id="b-vorname">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nachname *</label>
+            <input type="text" class="form-input" placeholder="Nachname" id="b-nachname">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">E-Mail *</label>
+            <input type="email" class="form-input" placeholder="ihre@email.de" id="b-email">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefon</label>
+            <input type="tel" class="form-input" placeholder="0211 ..." id="b-tel">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Stelle / Ausbildung *</label>
+          <select class="form-select form-input" id="b-stelle">
+            <option value="">Bitte wählen...</option>
+            <option>Ausbildung zum Elektriker</option>
+            <option>Gesellenstelle</option>
+            <option>Meisterstelle</option>
+            <option>Praktikum</option>
+            <option>Initiativbewerbung</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Erfahrung / Kurzbeschreibung *</label>
+          <textarea class="form-textarea" placeholder="Was bringen Sie mit? Ausbildungsstand, Berufserfahrung, Motivation..." id="b-msg"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Frühestmöglicher Beginn</label>
+          <input type="date" class="form-input" id="b-datum">
+        </div>
+        <button class="form-submit" onclick="submitBewerbung()">📤 Bewerbung absenden</button>
+        <div class="form-success" id="b-success">✅ Bewerbung eingegangen! Wir melden uns bald bei Ihnen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <div class="nav-logo-icon">AE</div>
+        <div class="nav-name">
+          Angelidis Elektrotechnik GmbH
+          <span>Meisterbetrieb · Düsseldorf</span>
+        </div>
+      </div>
+      <div class="footer-info">
+        📍 Zimmerstraße 33, Düsseldorf<br>
+        📞 <a href="tel:02115808711">0211 580 87 111</a><br>
+        ✉️ <a href="mailto:info@ae-elektrotechnik.com">info@ae-elektrotechnik.com</a><br>
+        🌐 <a href="#">www.ae-elektrotechnik.com</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-grau);margin-bottom:16px;">Leistungen</div>
+      <div style="color:var(--text-grau);font-size:13px;line-height:2.2;font-weight:300;">
+        Elektroanlagen<br>Sprechanlagen<br>Sicherungskasten<br>Smart Home<br>PV & Wallbox<br>Notdienst 24/7
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-grau);margin-bottom:16px;">Öffnungszeiten</div>
+      <div style="color:var(--text-grau);font-size:13px;line-height:2.2;font-weight:300;">
+        Montag – Freitag<br>07:00 – 18:00 Uhr<br><br>
+        <span style="color:var(--gelb);font-weight:600;">Notdienst: 24/7</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Angelidis Elektrotechnik GmbH · Meisterbetrieb</span>
+    <span>Impressum · Datenschutz · AGB</span>
+  </div>
+</footer>
+
+<!-- CHATBOT -->
+<div class="chatbot-bubble">
+  <div class="chatbot-window" id="chatWindow">
+    <div class="chatbot-header">
+      <div class="chatbot-avatar">⚡</div>
+      <div class="chatbot-header-info">
+        <strong>AE Assistent</strong>
+        <span>Elektriker-Fragen sofort beantwortet</span>
+      </div>
+      <button onclick="toggleChat()" style="margin-left:auto;background:none;border:none;color:#000;font-size:20px;cursor:pointer;opacity:0.6;">✕</button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages">
+      <div class="msg msg-bot">👋 Hallo! Ich bin der digitale Assistent von Angelidis Elektrotechnik. Stellen Sie mir gerne Ihre Frage rund ums Thema Elektro!</div>
+    </div>
+    <div class="chatbot-suggestions" id="suggestions">
+      <button class="suggestion-btn" onclick="askQuestion('Was kostet ein Sicherungskasten?')">💡 Sicherungskasten Kosten?</button>
+      <button class="suggestion-btn" onclick="askQuestion('Was kostet eine Sprechanlage?')">🔔 Sprechanlage wechseln?</button>
+      <button class="suggestion-btn" onclick="askQuestion('Was kostet eine Steckdose?')">🔌 Steckdose einbauen?</button>
+      <button class="suggestion-btn" onclick="askQuestion('Habt ihr Notdienst?')">🚨 Notdienst?</button>
+      <button class="suggestion-btn" onclick="askQuestion('Was kostet eine Wallbox?')">🚗 Wallbox / E-Auto?</button>
+    </div>
+    <div class="chatbot-input-row">
+      <input type="text" class="chatbot-input" id="chatInput" placeholder="Ihre Frage eingeben..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chatbot-send" onclick="sendChat()">➤</button>
+    </div>
+  </div>
+  <button class="chatbot-toggle" onclick="toggleChat()">⚡</button>
+</div>
+
+<script>
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) el.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+
+// Forms
+function submitKontakt() {
+  const name = document.getElementById('k-name').value;
+  const email = document.getElementById('k-email').value;
+  const msg = document.getElementById('k-msg').value;
+  if (!name || !email || !msg) { alert('Bitte füllen Sie alle Pflichtfelder aus.'); return; }
+  document.getElementById('k-success').style.display = 'block';
+  setTimeout(() => document.getElementById('k-success').style.display = 'none', 5000);
+}
+
+function submitBewerbung() {
+  const v = document.getElementById('b-vorname').value;
+  const n = document.getElementById('b-nachname').value;
+  const e = document.getElementById('b-email').value;
+  const m = document.getElementById('b-msg').value;
+  if (!v || !n || !e || !m) { alert('Bitte füllen Sie alle Pflichtfelder aus.'); return; }
+  document.getElementById('b-success').style.display = 'block';
+  setTimeout(() => document.getElementById('b-success').style.display = 'none', 5000);
+}
+
+// Chatbot
+function toggleChat() {
+  const w = document.getElementById('chatWindow');
+  w.classList.toggle('open');
+}
+
+const antworten = {
+  'sicherungskasten': 'Ein neuer Sicherungskasten kostet bei uns je nach Größe und Ausstattung zwischen **800 und 2.000 €** inkl. Montage. Bei einem veralteten Kasten empfehlen wir eine kostenlose Beratung vor Ort.',
+  'sprechanlage': 'Der Austausch einer Sprechanlage liegt je nach Modell und Aufwand meist zwischen **300 und 800 €** inkl. Material und Einbau. Moderne IP-Anlagen mit Video sind etwas teurer.',
+  'steckdose': 'Eine einzelne Steckdose kostet je nach Aufwand zwischen **58 und 150 €** inkl. Material. Wenn neue Leitungen verlegt werden müssen, kann es etwas mehr sein.',
+  'notdienst': 'Ja! Wir sind **24 Stunden täglich, 7 Tage die Woche** erreichbar — auch am Wochenende und an Feiertagen. Rufen Sie einfach an: 0211 580 87 111.',
+  'wallbox': 'Eine Wallbox für Ihr E-Auto kostet inkl. Installation ab ca. **800 bis 1.500 €**, je nach Standort und benötigter Leistung. Wir übernehmen auch die Anmeldung beim Netzbetreiber.',
+  'stundenlohn': 'Unser Stundensatz liegt zwischen **60 und 85 €** netto, abhängig von der Art der Arbeit. Für einen genauen Kostenvoranschlag kommen wir gerne kostenlos vorbei.',
+  'pv': 'Eine Photovoltaikanlage inkl. Installation startet je nach Größe ab ca. **8.000 €**. Wir beraten Sie gerne zu Förderungen und Einsparpotenzialen.',
+  'smarthome': 'Ein Smart-Home-System kostet je nach Umfang ab ca. **2.000 €** für ein einzelnes Zimmer bis zu **15.000 €+** für komplette Häuser mit KNX.',
+  'ausbildung': 'Wir sind **Ausbildungsbetrieb** und bilden Elektrofachkräfte aus! Schicken Sie einfach Ihre Bewerbung über das Formular auf dieser Seite.',
+};
+
+function getAntwort(frage) {
+  const f = frage.toLowerCase();
+  if (f.includes('sicherung') || f.includes('kasten') || f.includes('verteiler')) return antworten['sicherungskasten'];
+  if (f.includes('sprech') || f.includes('klingel') || f.includes('türstation') || f.includes('gegensprech')) return antworten['sprechanlage'];
+  if (f.includes('steckdose')) return antworten['steckdose'];
+  if (f.includes('notdienst') || f.includes('notfall') || f.includes('24')) return antworten['notdienst'];
+  if (f.includes('wallbox') || f.includes('e-auto') || f.includes('elektroauto') || f.includes('laden')) return antworten['wallbox'];
+  if (f.includes('stundenlohn') || f.includes('stunde') || f.includes('preis') || f.includes('kosten')) return antworten['stundenlohn'];
+  if (f.includes('solar') || f.includes('pv') || f.includes('photovoltaik')) return antworten['pv'];
+  if (f.includes('smart') || f.includes('knx') || f.includes('intelligent')) return antworten['smarthome'];
+  if (f.includes('ausbildung') || f.includes('lehrstelle') || f.includes('bewerb')) return antworten['ausbildung'];
+  return 'Zu Ihrer Frage kann ich Ihnen gerne persönlich mehr sagen. Rufen Sie uns an unter **0211 580 87 111** oder schreiben Sie uns über das Kontaktformular — wir antworten innerhalb von 24 Stunden!';
+}
+
+function addMsg(text, isBot) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + (isBot ? 'msg-bot' : 'msg-user');
+  div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'typing-indicator';
+  div.id = 'typing';
+  div.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing');
+  if (t) t.remove();
+}
+
+function askQuestion(q) {
+  document.getElementById('suggestions').style.display = 'none';
+  addMsg(q, false);
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMsg(getAntwort(q), true);
+  }, 900);
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const val = input.value.trim();
+  if (!val) return;
+  document.getElementById('suggestions').style.display = 'none';
+  addMsg(val, false);
+  input.value = '';
+  showTyping();
+  setTimeout(() => {
+    removeTyping();
+    addMsg(getAntwort(val), true);
+  }, 900);
+}
+</script>
+</body>
+</html>

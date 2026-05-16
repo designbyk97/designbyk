@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kanzlei Brandt & Partner – Rechtsanwälte Düsseldorf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--white:#ffffff;--off:#f4f2ee;--cream:#ede8df;--dark:#0f0e0c;--navy:#0f1e34;--text:#1a1a18;--text-mid:#4a4a48;--text-dim:#8a8a88;--border:#ddd8d0;--gold:#9a7832;--gold-light:#b8963e;--red:#6a1010}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--white);color:var(--text);font-family:'Source Sans 3',sans-serif;font-weight:300;overflow-x:hidden}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw}
+    .nav-logo{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--dark);text-decoration:none;letter-spacing:0.02em}
+    .nav-logo span{color:var(--gold)}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav-links a{font-size:12px;font-weight:400;letter-spacing:0.06em;color:var(--text-mid);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-cta{border:1px solid var(--gold)!important;color:var(--gold)!important;padding:9px 20px}
+    .nav-cta:hover{background:var(--gold)!important;color:white!important}
+
+    #hero{min-height:100vh;background:var(--navy);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative}
+    #hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8963e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+
+    .hero-left{display:flex;flex-direction:column;justify-content:center;padding:120px 6vw 80px;position:relative;z-index:2}
+    .hero-tag{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:24px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+    .hero-tag::before{content:'';width:28px;height:1px;background:var(--gold)}
+    .hero-title{font-family:'Libre Baskerville',serif;font-size:clamp(38px,4.5vw,66px);font-weight:700;line-height:1.1;color:white;margin-bottom:24px;opacity:0;animation:fadeUp 0.8s 0.4s forwards}
+    .hero-title em{font-style:italic;color:var(--gold-light);display:block;font-weight:400}
+    .hero-sub{font-size:14px;line-height:1.9;color:rgba(255,255,255,0.5);max-width:420px;margin-bottom:40px;opacity:0;animation:fadeUp 0.8s 0.6s forwards}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.8s forwards}
+    .btn-gg{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:white;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:background 0.2s,transform 0.15s}
+    .btn-gg:hover{background:var(--gold-light);transform:translateY(-2px)}
+    .btn-ghost-n{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:all 0.2s}
+    .btn-ghost-n:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px)}
+
+    .hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:120px 6vw 80px}
+    .facts-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:40px;width:100%;max-width:380px}
+    .fc-title{font-family:'Libre Baskerville',serif;font-size:14px;font-style:italic;color:var(--gold-light);margin-bottom:24px;letter-spacing:0.05em}
+    .fc-items{display:flex;flex-direction:column;gap:0}
+    .fc-item{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .fc-item:last-child{border-bottom:none}
+    .fc-label{font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:0.06em}
+    .fc-val{font-family:'Libre Baskerville',serif;font-size:24px;font-weight:700;color:var(--gold-light)}
+    .fc-val small{font-size:12px;font-weight:400;font-family:'Source Sans 3',sans-serif;color:rgba(255,255,255,0.4)}
+
+    section{padding:100px 6vw}
+    .sec-tag{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+    .sec-tag::before{content:'';width:20px;height:1px;background:var(--gold)}
+    .sec-title{font-family:'Libre Baskerville',serif;font-size:clamp(30px,4vw,50px);font-weight:700;line-height:1.15;margin-bottom:16px}
+    .sec-title em{font-style:italic;color:var(--gold);font-weight:400}
+    .sec-sub{font-size:14px;line-height:1.8;color:var(--text-mid);max-width:520px;margin-bottom:60px}
+
+    #rechtsgebiete{background:var(--off)}
+    .rg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+    .rg-card{background:white;padding:36px 28px;border-left:3px solid transparent;transition:border-color 0.2s,background 0.2s;opacity:0;transform:translateY(24px)}
+    .rg-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.2s}
+    .rg-card:hover{border-left-color:var(--gold);background:var(--off)}
+    .rg-icon{font-size:32px;margin-bottom:16px;display:block}
+    .rg-name{font-family:'Libre Baskerville',serif;font-size:20px;margin-bottom:10px}
+    .rg-desc{font-size:13px;line-height:1.7;color:var(--text-mid)}
+    .rg-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--gold);text-decoration:none;margin-top:16px;letter-spacing:0.06em;transition:gap 0.2s}
+    .rg-link:hover{gap:10px}
+
+    #anwaelte{background:white}
+    .anwaelte-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
+    .anwalt-card{background:var(--off);overflow:hidden;opacity:0;transform:translateY(20px)}
+    .anwalt-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .aw-header{height:180px;position:relative}
+    .aw-canvas{width:100%;height:100%}
+    .aw-initial{position:absolute;bottom:16px;left:20px;font-family:'Libre Baskerville',serif;font-size:48px;font-weight:700;color:rgba(255,255,255,0.15)}
+    .aw-body{padding:24px}
+    .aw-name{font-family:'Libre Baskerville',serif;font-size:20px;margin-bottom:4px}
+    .aw-title{font-size:11px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px}
+    .aw-spec{font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:14px}
+    .aw-edu{font-size:11px;color:var(--text-dim);border-top:1px solid var(--border);padding-top:12px}
+
+    #mandanten{background:var(--off)}
+    .mandanten-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+    .m-left h2{font-family:'Libre Baskerville',serif;font-size:clamp(28px,3.5vw,44px);margin-bottom:16px}
+    .m-left h2 em{font-style:italic;color:var(--gold)}
+    .m-left p{font-size:14px;line-height:1.8;color:var(--text-mid);margin-bottom:28px}
+    .m-detail{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .m-icon{width:38px;height:38px;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .m-text strong{display:block;font-size:10px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px}
+    .m-text span{font-size:13px;color:var(--text)}
+    .m-form{background:white;border:1px solid var(--border);padding:36px}
+    .mf-title{font-family:'Libre Baskerville',serif;font-size:22px;font-style:italic;color:var(--gold);margin-bottom:24px}
+    .fg{margin-bottom:16px}
+    .fg label{display:block;font-size:10px;font-weight:500;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:7px}
+    .fg input,.fg select,.fg textarea{width:100%;border:1px solid var(--border);background:var(--off);color:var(--text);font-family:'Source Sans 3',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;border-radius:0}
+    .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+    .fg select option{background:white}
+    .fg textarea{resize:none;height:80px}
+    .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .btn-m{width:100%;background:var(--navy);color:white;border:none;font-family:'Source Sans 3',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;padding:15px;cursor:pointer;transition:background 0.2s;margin-top:8px}
+    .btn-m:hover{background:#1a2e4a}
+    .m-success{display:none;text-align:center;padding:40px}
+    .m-success h4{font-family:'Libre Baskerville',serif;font-size:24px;font-style:italic;color:var(--gold);margin-bottom:10px}
+    .m-success p{font-size:13px;color:var(--text-mid)}
+    .disclaimer{font-size:10px;color:var(--text-dim);margin-top:12px;line-height:1.5;text-align:center}
+
+    #bewertungen-ra{background:var(--navy)}
+    .bw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);margin-top:60px}
+    .bw-card{background:var(--navy);padding:32px 24px;opacity:0;transform:translateY(20px)}
+    .bw-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .bw-stars{color:var(--gold-light);font-size:13px;letter-spacing:3px;margin-bottom:14px}
+    .bw-text{font-family:'Libre Baskerville',serif;font-size:15px;font-style:italic;line-height:1.7;color:rgba(255,255,255,0.7);margin-bottom:16px}
+    .bw-author{font-size:12px;color:rgba(255,255,255,0.35);letter-spacing:0.06em}
+
+    footer{background:#080706;padding:48px 6vw 28px;border-top:1px solid rgba(255,255,255,0.06)}
+    .ft{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:60px;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .f-brand{font-family:'Libre Baskerville',serif;font-size:18px;color:white;margin-bottom:10px}
+    .f-brand span{color:var(--gold-light)}
+    .f-desc{font-size:12px;color:rgba(255,255,255,0.25);line-height:1.7}
+    .f-col-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+    .f-col a,.f-col p{display:block;font-size:12px;color:rgba(255,255,255,0.25);text-decoration:none;margin-bottom:7px;transition:color 0.2s}
+    .f-col a:hover{color:var(--gold-light)}
+    .f-bottom{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.15);flex-wrap:wrap;gap:10px}
+
+    @media(max-width:900px){#hero{grid-template-columns:1fr}.hero-right{display:none}.rg-grid{grid-template-columns:1fr}.anwaelte-grid{grid-template-columns:1fr}.mandanten-wrap{grid-template-columns:1fr;gap:40px}.bw-grid{grid-template-columns:1fr}.ft{grid-template-columns:1fr;gap:28px}nav .nav-links{display:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">Brandt <span>&</span> Partner</a>
+  <ul class="nav-links">
+    <li><a href="#rechtsgebiete">Rechtsgebiete</a></li>
+    <li><a href="#anwaelte">Anwälte</a></li>
+    <li><a href="#bewertungen-ra">Referenzen</a></li>
+    <li><a href="#mandanten" class="nav-cta">Erstberatung</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Rechtsanwaltskanzlei · Düsseldorf · Seit 1994</div>
+    <h1 class="hero-title">Ihr Recht.<br><em>Unsere Stärke.</em></h1>
+    <p class="hero-sub">Brandt & Partner steht seit über 30 Jahren für kompetente, persönliche Rechtsberatung in Düsseldorf. Diskretion und Ergebnisorientierung sind unser Versprechen.</p>
+    <div class="hero-btns">
+      <a href="#mandanten" class="btn-gg">Erstberatung vereinbaren →</a>
+      <a href="#rechtsgebiete" class="btn-ghost-n">Unsere Rechtsgebiete</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="facts-card">
+      <div class="fc-title">Kanzlei in Zahlen</div>
+      <div class="fc-items">
+        <div class="fc-item"><span class="fc-label">Jahre Erfahrung</span><span class="fc-val">30+ <small>Jahre</small></span></div>
+        <div class="fc-item"><span class="fc-label">Erfolgreich vertretene Mandate</span><span class="fc-val">5.200+ <small>Fälle</small></span></div>
+        <div class="fc-item"><span class="fc-label">Rechtsgebiete</span><span class="fc-val">12 <small>Bereiche</small></span></div>
+        <div class="fc-item"><span class="fc-label">Zugelassene Anwälte</span><span class="fc-val">6 <small>Partner</small></span></div>
+        <div class="fc-item"><span class="fc-label">Google Bewertung</span><span class="fc-val">4.9 <small>★ (284)</small></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rechtsgebiete">
+  <div class="sec-tag">Unsere Expertise</div>
+  <h2 class="sec-title">Rechtsgebiete &amp; <em>Beratung</em></h2>
+  <p class="sec-sub">Spezialisiert und dennoch breit aufgestellt – für Privatpersonen und Unternehmen jeder Größe.</p>
+  <div class="rg-grid">
+    <div class="rg-card"><span class="rg-icon">⚖️</span><h3 class="rg-name">Familienrecht</h3><p class="rg-desc">Scheidung, Sorgerecht, Unterhalt, Erbrecht – einfühlsame Beratung in schwierigen Lebenssituationen.</p><a href="#mandanten" class="rg-link">Beratung anfragen →</a></div>
+    <div class="rg-card"><span class="rg-icon">🏢</span><h3 class="rg-name">Arbeitsrecht</h3><p class="rg-desc">Kündigung, Abfindung, Arbeitszeugnis – wir vertreten Arbeitnehmer und Arbeitgeber gleichermaßen kompetent.</p><a href="#mandanten" class="rg-link">Beratung anfragen →</a></div>
+    <div class="rg-card"><span class="rg-icon">📋</span><h3 class="rg-name">Vertragsrecht</h3><p class="rg-desc">Prüfung, Gestaltung und Durchsetzung von Verträgen – für Privatpersonen und Unternehmen.</p><a href="#mandanten" class="rg-link">Beratung anfragen →</a></div>
+    <div class="rg-card"><span class="rg-icon">🏠</span><h3 class="rg-name">Mietrecht</h3><p class="rg-desc">Mieterhöhung, Kündigung, Nebenkostenabrechnung, Mängel – wir kennen das Düsseldorfer Mietrecht.</p><a href="#mandanten" class="rg-link">Beratung anfragen →</a></div>
+    <div class="rg-card"><span class="rg-icon">💼</span><h3 class="rg-name">Gesellschaftsrecht</h3><p class="rg-desc">GmbH-Gründung, Gesellschafterstreitigkeiten, Umstrukturierungen – rechtssichere Unternehmensberatung.</p><a href="#mandanten" class="rg-link">Beratung anfragen →</a></div>
+    <div class="rg-card"><span class="rg-icon">🛡️</span><h3 class="rg-name">Strafrecht</h3><p class="rg-desc">Strafverteidigung auf höchstem Niveau – diskret, kompetent und mit vollem Einsatz für Ihre Interessen.</p><a href="#mandanten" class="rg-link">Beratung anfragen →</a></div>
+  </div>
+</section>
+
+<section id="anwaelte">
+  <div class="sec-tag">Das Kanzleiteam</div>
+  <h2 class="sec-title">Ihre Anwälte bei<br><em>Brandt & Partner</em></h2>
+  <div class="anwaelte-grid">
+    <div class="anwalt-card"><div class="aw-header"><canvas class="aw-canvas" id="aw1"></canvas><div class="aw-initial">B</div></div><div class="aw-body"><div class="aw-name">Dr. Heinrich Brandt</div><div class="aw-title">Gründungspartner</div><p class="aw-spec">Spezialist für Wirtschaftsrecht, M&A und Gesellschaftsrecht. Berät mittelständische Unternehmen seit 30 Jahren.</p><div class="aw-edu">Universität Köln · Dr. jur. · Fachanwalt Handels- und Gesellschaftsrecht</div></div></div>
+    <div class="anwalt-card"><div class="aw-header"><canvas class="aw-canvas" id="aw2"></canvas><div class="aw-initial">K</div></div><div class="aw-body"><div class="aw-name">Prof. Dr. Katrin Koch</div><div class="aw-title">Partnerin</div><p class="aw-spec">Familienrecht und Erbrecht. Lehrbeauftragte an der Heinrich-Heine-Universität Düsseldorf.</p><div class="aw-edu">HHU Düsseldorf · Dr. jur. · Fachanwältin Familienrecht</div></div></div>
+    <div class="anwalt-card"><div class="aw-header"><canvas class="aw-canvas" id="aw3"></canvas><div class="aw-initial">M</div></div><div class="aw-body"><div class="aw-name">Marcus Zimmermann</div><div class="aw-title">Rechtsanwalt</div><p class="aw-spec">Arbeitsrecht für Arbeitnehmer und Arbeitgeber. Über 800 erfolgreiche Kündigungsschutzklagen.</p><div class="aw-edu">Universität Bonn · Fachanwalt Arbeitsrecht</div></div></div>
+  </div>
+</section>
+
+<section id="bewertungen-ra">
+  <div class="sec-tag" style="color:var(--gold-light)">Mandantenstimmen</div>
+  <h2 class="sec-title" style="color:white">Was unsere<br><em style="color:var(--gold-light)">Mandanten</em> sagen</h2>
+  <div class="bw-grid">
+    <div class="bw-card"><div class="bw-stars">★★★★★</div><p class="bw-text">"Dr. Brandt hat uns durch eine komplexe Unternehmenstransaktion geführt. Höchste Professionalität und absolute Verlässlichkeit."</p><div class="bw-author">— Geschäftsführer, Mittelstandsunternehmen</div></div>
+    <div class="bw-card"><div class="bw-stars">★★★★★</div><p class="bw-text">"Prof. Koch hat meine Scheidung mit unglaublicher Sensibilität und Kompetenz begleitet. Ich fühlte mich zu jeder Zeit gut aufgehoben."</p><div class="bw-author">— Mandantin, Familienrecht</div></div>
+    <div class="bw-card"><div class="bw-stars">★★★★★</div><p class="bw-text">"Herr Zimmermann hat meine Kündigung erfolgreich angefochten. Innerhalb von 3 Monaten war alles geregelt – ich kann ihn uneingeschränkt empfehlen."</p><div class="bw-author">— Mandant, Arbeitsrecht</div></div>
+  </div>
+</section>
+
+<section id="mandanten">
+  <div class="mandanten-wrap">
+    <div class="m-left">
+      <div class="sec-tag">Erstberatung</div>
+      <h2>Sprechen Sie mit<br>einem <em>Anwalt.</em></h2>
+      <p>Ihre erste Einschätzung erhalten Sie innerhalb von 24 Stunden. Vertraulich, unverbindlich und klar. Erstberatungsgebühr nach RVG: 190 € inkl. MwSt.</p>
+      <div class="m-detail"><div class="m-icon">📍</div><div class="m-text"><strong>Adresse</strong><span>Cecilienallee 6, 40474 Düsseldorf</span></div></div>
+      <div class="m-detail"><div class="m-icon">📞</div><div class="m-text"><strong>Telefon</strong><span>0211 / 222 333 44</span></div></div>
+      <div class="m-detail"><div class="m-icon">🕐</div><div class="m-text"><strong>Kanzleizeiten</strong><span>Mo–Fr: 8:30–18:00 Uhr</span></div></div>
+    </div>
+    <div class="m-form">
+      <div class="mf-title">Erstberatung anfragen</div>
+      <div id="m-fields">
+        <div class="fg-row">
+          <div class="fg"><label>Vorname</label><input type="text" placeholder="Max"/></div>
+          <div class="fg"><label>Nachname</label><input type="text" placeholder="Mustermann"/></div>
+        </div>
+        <div class="fg"><label>Rechtsgebiet</label><select><option>Familienrecht</option><option>Arbeitsrecht</option><option>Vertragsrecht</option><option>Mietrecht</option><option>Gesellschaftsrecht</option><option>Strafrecht</option><option>Sonstiges</option></select></div>
+        <div class="fg"><label>Kurze Beschreibung Ihres Anliegens</label><textarea placeholder="Bitte beschreiben Sie kurz Ihr rechtliches Anliegen..."></textarea></div>
+        <div class="fg-row">
+          <div class="fg"><label>Telefon</label><input type="tel" placeholder="0211 ..."/></div>
+          <div class="fg"><label>E-Mail</label><input type="email" placeholder="mail@beispiel.de"/></div>
+        </div>
+        <button class="btn-m" onclick="document.getElementById('m-fields').style.display='none';document.querySelector('.m-success').style.display='block'">Anfrage absenden →</button>
+        <p class="disclaimer">Mit der Übermittlung stimmen Sie der Verarbeitung Ihrer Daten zu. Alle Angaben unterliegen der anwaltlichen Verschwiegenheitspflicht.</p>
+      </div>
+      <div class="m-success"><h4>Vielen Dank.</h4><p>Ihre Anfrage ist eingegangen. Ein Anwalt meldet sich innerhalb von 24 Stunden bei Ihnen.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div><div class="f-brand">Brandt <span>&</span> Partner</div><p class="f-desc">Rechtsanwaltskanzlei Düsseldorf · Cecilienallee 6 · 40474 Düsseldorf · Seit 1994</p></div>
+    <div class="f-col"><div class="f-col-title">Rechtsgebiete</div><a href="#">Familienrecht</a><a href="#">Arbeitsrecht</a><a href="#">Gesellschaftsrecht</a><a href="#">Mietrecht</a><a href="#">Strafrecht</a></div>
+    <div class="f-col"><div class="f-col-title">Kanzlei</div><p>Cecilienallee 6, Düsseldorf</p><a href="#">0211 / 222 333 44</a><a href="#">info@brandt-partner.de</a></div>
+  </div>
+  <div class="f-bottom"><span>© 2025 Brandt & Partner Rechtsanwälte · Impressum · Datenschutz</span><span style="color:rgba(255,255,255,0.06);font-size:10px">Website by KL Web Design</span></div>
+</footer>
+
+<script>
+const awColors = [['#0f1e0f','#1a2e1a'],['#1a1a0f','#2a2a1a'],['#0f0f1e','#1a1a2e']];
+['aw1','aw2','aw3'].forEach((id,idx)=>{
+  const c=document.getElementById(id);if(!c)return;
+  const ctx=c.getContext('2d');let t=Math.random()*10;
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}resize();window.addEventListener('resize',resize);
+  function frame(){t+=0.004;const W=c.width,H=c.height;ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,W,H);bg.addColorStop(0,awColors[idx][0]);bg.addColorStop(1,awColors[idx][1]);ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    ctx.save();ctx.globalAlpha=0.06+0.02*Math.sin(t);ctx.strokeStyle='#b8963e';ctx.lineWidth=0.8;
+    for(let i=0;i<4;i++){ctx.beginPath();ctx.arc(W*0.5,H*0.5,40+i*30+Math.sin(t+i)*5,0,Math.PI*2);ctx.stroke()}
+    ctx.restore();requestAnimationFrame(frame);}
+  frame();
+});
+const revealEls=document.querySelectorAll('.rg-card,.anwalt-card,.bw-card');
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),(e.target.dataset.i||0)*80)})},{threshold:0.1});
+revealEls.forEach((el,i)=>{el.dataset.i=i%5;io.observe(el)});
+</script>
+</body>
+</html>

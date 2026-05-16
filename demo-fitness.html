@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FORGE Fitness – Premium Gym Düsseldorf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--black:#050506;--dark:#0a0a0c;--card:#0f0f12;--border:#1a1a20;--red:#c82020;--red-light:#e03030;--red-dim:#6a0a0a;--white:#f2f0f5;--grey:#7a7a8a;--dim:#3a3a4a;--gold:#c8a030}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,5,6,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw}
+    .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.15em;color:var(--white);text-decoration:none}
+    .nav-logo span{color:var(--red)}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav-links a{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover{color:var(--red)}
+    .nav-cta{background:var(--red)!important;color:white!important;padding:9px 20px}
+    .nav-cta:hover{background:var(--red-light)!important}
+
+    #hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:100px 6vw 60px;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#050506 0%,#100508 50%,#050506 100%)}
+    #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+
+    .hero-content{position:relative;z-index:2;max-width:680px}
+    .hero-tag{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);margin-bottom:20px;display:flex;align-items:center;gap:12px;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+    .hero-tag::before{content:'';width:32px;height:2px;background:var(--red)}
+    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,10vw,150px);line-height:0.9;letter-spacing:0.03em;color:var(--white);margin-bottom:24px;opacity:0;animation:fadeUp 0.8s 0.4s forwards}
+    .hero-title span{color:var(--red);display:block}
+    .hero-sub{font-size:15px;line-height:1.8;color:var(--grey);max-width:480px;margin-bottom:40px;opacity:0;animation:fadeUp 0.8s 0.6s forwards}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.8s forwards}
+    .btn-red{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:white;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.12em;text-transform:uppercase;padding:14px 32px;text-decoration:none;transition:background 0.2s,transform 0.15s}
+    .btn-red:hover{background:var(--red-light);transform:translateY(-2px)}
+    .btn-ghost-w{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);color:var(--grey);font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;padding:14px 32px;text-decoration:none;transition:all 0.2s}
+    .btn-ghost-w:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+
+    .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:56px;opacity:0;animation:fadeUp 0.8s 1s forwards}
+    .hs{background:var(--card);border:1px solid var(--border);padding:20px;text-align:center}
+    .hs-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--red);line-height:1}
+    .hs-label{font-size:10px;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px}
+
+    section{padding:100px 6vw}
+    .sec-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+    .sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,88px);line-height:0.95;letter-spacing:0.03em;margin-bottom:16px}
+    .sec-title span{color:var(--red)}
+    .sec-sub{font-size:14px;line-height:1.8;color:var(--grey);max-width:500px;margin-bottom:60px}
+
+    #kurse{background:var(--dark)}
+    .kurse-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+    .kurs-card{background:var(--card);border:1px solid var(--border);padding:0;overflow:hidden;position:relative;opacity:0;transform:translateY(24px)}
+    .kurs-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .kurs-header{padding:28px;display:flex;align-items:flex-start;justify-content:space-between}
+    .kurs-icon{font-size:36px}
+    .kurs-level{font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 8px;background:rgba(200,32,32,0.15);color:var(--red);border:1px solid rgba(200,32,32,0.2)}
+    .kurs-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;padding:0 28px;margin-bottom:8px}
+    .kurs-desc{font-size:13px;color:var(--grey);line-height:1.65;padding:0 28px;margin-bottom:20px}
+    .kurs-meta{display:flex;gap:16px;padding:20px 28px;border-top:1px solid var(--border);background:rgba(255,255,255,0.02)}
+    .kurs-meta-item{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:4px}
+    .kurs-meta-item span{color:var(--grey);font-weight:500}
+
+    #mitgliedschaft{background:var(--black)}
+    .mitgl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+    .mitgl-card{background:var(--card);border:1px solid var(--border);padding:36px 28px;position:relative;opacity:0;transform:translateY(24px)}
+    .mitgl-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .mitgl-card.featured{border-color:var(--red)}
+    .mitgl-badge{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+    .mitgl-name{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;margin-bottom:8px}
+    .mitgl-price{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--red);line-height:1;margin-bottom:4px}
+    .mitgl-period{font-size:12px;color:var(--dim);margin-bottom:24px}
+    .mitgl-features{list-style:none;margin-bottom:28px}
+    .mitgl-features li{font-size:13px;color:var(--grey);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+    .mitgl-features li::before{content:'✓';color:var(--red);font-size:10px;font-weight:700}
+    .btn-mitgl{display:block;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;padding:14px;text-decoration:none;cursor:pointer;transition:all 0.2s;width:100%;border:none;font-family:'Barlow Condensed',sans-serif}
+    .mitgl-card:not(.featured) .btn-mitgl{background:none;border:1px solid var(--border);color:var(--grey)}
+    .mitgl-card:not(.featured) .btn-mitgl:hover{border-color:var(--red);color:var(--red)}
+    .mitgl-card.featured .btn-mitgl{background:var(--red);color:white}
+    .mitgl-card.featured .btn-mitgl:hover{background:var(--red-light)}
+
+    #trainer{background:var(--dark)}
+    .trainer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px}
+    .trainer-card{background:var(--card);border:1px solid var(--border);padding:28px 20px;text-align:center;opacity:0;transform:translateY(20px)}
+    .trainer-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .trainer-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:28px;color:white;border:2px solid var(--red)}
+    .ta1{background:linear-gradient(135deg,#6a0a0a,var(--red))}
+    .ta2{background:linear-gradient(135deg,#0a2a6a,#1a4aaa)}
+    .ta3{background:linear-gradient(135deg,#0a4a0a,#1a8a2a)}
+    .ta4{background:linear-gradient(135deg,#4a2a0a,#8a5a1a)}
+    .trainer-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px}
+    .trainer-spec{font-size:11px;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
+    .trainer-cert{font-size:11px;color:var(--dim)}
+
+    #probetraining{background:var(--black)}
+    .probe-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+    .probe-info h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);line-height:1;margin-bottom:16px}
+    .probe-info h2 span{color:var(--red)}
+    .probe-info p{font-size:14px;line-height:1.8;color:var(--grey);margin-bottom:28px}
+    .pi-detail{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:13px}
+    .pi-icon{width:36px;height:36px;background:rgba(200,32,32,0.1);border:1px solid rgba(200,32,32,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .pi-text strong{display:block;font-size:10px;color:var(--red);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px}
+    .probe-form{background:var(--card);border:1px solid var(--border);padding:36px}
+    .pf-title{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--red);letter-spacing:0.04em;margin-bottom:24px}
+    .fg{margin-bottom:16px}
+    .fg label{display:block;font-size:10px;font-weight:600;color:var(--grey);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:7px}
+    .fg input,.fg select{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;border-radius:0}
+    .fg input:focus,.fg select:focus{border-color:var(--red)}
+    .fg select option{background:var(--card)}
+    .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .btn-probe{width:100%;background:var(--red);color:white;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.12em;padding:16px;cursor:pointer;transition:background 0.2s;margin-top:8px}
+    .btn-probe:hover{background:var(--red-light)}
+    .probe-success{display:none;text-align:center;padding:40px}
+    .probe-success h4{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--red);letter-spacing:0.05em;margin-bottom:10px}
+    .probe-success p{font-size:13px;color:var(--grey)}
+
+    footer{background:var(--dark);border-top:1px solid var(--border);padding:48px 6vw 28px}
+    .ft{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:60px;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border)}
+    .f-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.1em;color:var(--white);margin-bottom:10px}
+    .f-logo span{color:var(--red)}
+    .f-desc{font-size:12px;color:var(--dim);line-height:1.7}
+    .f-col-title{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+    .f-col a,.f-col p{display:block;font-size:12px;color:var(--dim);text-decoration:none;margin-bottom:7px;transition:color 0.2s}
+    .f-col a:hover{color:var(--red)}
+    .f-bottom{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);flex-wrap:wrap;gap:10px}
+
+    @media(max-width:900px){.kurse-grid{grid-template-columns:1fr}.mitgl-grid{grid-template-columns:1fr}.trainer-grid{grid-template-columns:1fr 1fr}.probe-wrap{grid-template-columns:1fr;gap:40px}.ft{grid-template-columns:1fr;gap:28px}nav .nav-links{display:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">FORGE<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#kurse">Kurse</a></li>
+    <li><a href="#mitgliedschaft">Mitgliedschaft</a></li>
+    <li><a href="#trainer">Trainer</a></li>
+    <li><a href="#probetraining" class="nav-cta">Probetraining</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag">Premium Gym · Düsseldorf</div>
+    <h1 class="hero-title">FORGE<span>YOUR BODY.</span></h1>
+    <p class="hero-sub">Kein Mainstream. Kein Kompromiss. FORGE ist das Premium-Fitnessstudio für Menschen die es ernst meinen – mit modernster Ausstattung und Trainern auf Elite-Niveau.</p>
+    <div class="hero-btns">
+      <a href="#probetraining" class="btn-red">Probetraining buchen →</a>
+      <a href="#mitgliedschaft" class="btn-ghost-w">Mitgliedschaft ansehen</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-num">1.200+</div><div class="hs-label">Mitglieder</div></div>
+      <div class="hs"><div class="hs-num">48</div><div class="hs-label">Kurse/Woche</div></div>
+      <div class="hs"><div class="hs-num">12</div><div class="hs-label">Zertif. Trainer</div></div>
+      <div class="hs"><div class="hs-num">24/7</div><div class="hs-label">Geöffnet</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="kurse">
+  <div class="sec-tag">Unser Angebot</div>
+  <h2 class="sec-title">UNSERE <span>KURSE</span></h2>
+  <p class="sec-sub">48 Kurse pro Woche – von Yoga bis HIIT. Für jeden das Richtige, auf jedem Level.</p>
+  <div class="kurse-grid">
+    <div class="kurs-card"><div class="kurs-header"><div class="kurs-icon">💪</div><div class="kurs-level">Alle Level</div></div><div class="kurs-name">STRENGTH TRAINING</div><p class="kurs-desc">Freihanteln, Maschinen und funktionelles Training für maximalen Muskelaufbau. Periodisierte Programme nach deinen Zielen.</p><div class="kurs-meta"><div class="kurs-meta-item">⏱ <span>60 Min</span></div><div class="kurs-meta-item">👥 <span>Max. 12 P.</span></div><div class="kurs-meta-item">📅 <span>Mo–Sa</span></div></div></div>
+    <div class="kurs-card"><div class="kurs-header"><div class="kurs-icon">🔥</div><div class="kurs-level">Fortgeschritten</div></div><div class="kurs-name">HIIT & CARDIO</div><p class="kurs-desc">High-Intensity Intervall Training für maximale Fettverbrennung. Kombiniert Kraft und Ausdauer in 45 intensiven Minuten.</p><div class="kurs-meta"><div class="kurs-meta-item">⏱ <span>45 Min</span></div><div class="kurs-meta-item">👥 <span>Max. 20 P.</span></div><div class="kurs-meta-item">📅 <span>Di & Do</span></div></div></div>
+    <div class="kurs-card"><div class="kurs-header"><div class="kurs-icon">🧘</div><div class="kurs-level">Alle Level</div></div><div class="kurs-name">YOGA & MOBILITY</div><p class="kurs-desc">Regeneration, Flexibilität und mentale Stärke. Der perfekte Ausgleich zu intensivem Training.</p><div class="kurs-meta"><div class="kurs-meta-item">⏱ <span>75 Min</span></div><div class="kurs-meta-item">👥 <span>Max. 15 P.</span></div><div class="kurs-meta-item">📅 <span>Mi & So</span></div></div></div>
+    <div class="kurs-card"><div class="kurs-header"><div class="kurs-icon">🥊</div><div class="kurs-level">Anfänger OK</div></div><div class="kurs-name">BOX-FITNESS</div><p class="kurs-desc">Boxen als Fitnesstraining ohne Kontakt. Koordination, Kraft, Ausdauer – und der perfekte Stressabbau.</p><div class="kurs-meta"><div class="kurs-meta-item">⏱ <span>60 Min</span></div><div class="kurs-meta-item">👥 <span>Max. 16 P.</span></div><div class="kurs-meta-item">📅 <span>Mo & Fr</span></div></div></div>
+    <div class="kurs-card"><div class="kurs-header"><div class="kurs-icon">🏋️</div><div class="kurs-level">Fortgeschritten</div></div><div class="kurs-name">POWERLIFTING</div><p class="kurs-desc">Kniebeuge, Bankdrücken, Kreuzheben – trainiert von zertifizierten Powerlifting-Trainern für maximale Kraft.</p><div class="kurs-meta"><div class="kurs-meta-item">⏱ <span>90 Min</span></div><div class="kurs-meta-item">👥 <span>Max. 8 P.</span></div><div class="kurs-meta-item">📅 <span>Di & Sa</span></div></div></div>
+    <div class="kurs-card"><div class="kurs-header"><div class="kurs-icon">🏃</div><div class="kurs-level">Anfänger OK</div></div><div class="kurs-name">FUNCTIONAL FITNESS</div><p class="kurs-desc">Training für den Alltag. Bewegungsmuster die dich stärker, schneller und belastbarer machen im echten Leben.</p><div class="kurs-meta"><div class="kurs-meta-item">⏱ <span>50 Min</span></div><div class="kurs-meta-item">👥 <span>Max. 14 P.</span></div><div class="kurs-meta-item">📅 <span>Mo–Fr</span></div></div></div>
+  </div>
+</section>
+
+<section id="mitgliedschaft">
+  <div class="sec-tag">Preise</div>
+  <h2 class="sec-title">MITGLIED<span>SCHAFT</span></h2>
+  <p class="sec-sub">Keine versteckten Kosten. Keine Mindestlaufzeit im Monatsabo. Kein Bullshit.</p>
+  <div class="mitgl-grid">
+    <div class="mitgl-card"><div class="mitgl-badge">Einsteiger</div><div class="mitgl-name">BASIC</div><div class="mitgl-price">49 €</div><div class="mitgl-period">pro Monat · monatlich kündbar</div><ul class="mitgl-features"><li>Freier Gerätezugang</li><li>Mo–Fr 6:00–22:00 Uhr</li><li>Umkleiden & Duschen</li><li>App-Mitgliedschaft</li></ul><button class="btn-mitgl" onclick="window.location='#probetraining'">Jetzt starten</button></div>
+    <div class="mitgl-card featured"><div class="mitgl-badge">Beliebt · Meist gewählt</div><div class="mitgl-name">PRO</div><div class="mitgl-price">79 €</div><div class="mitgl-period">pro Monat · monatlich kündbar</div><ul class="mitgl-features"><li>Freier Gerätezugang</li><li>24/7 Zugang</li><li>Alle Kurse inklusive</li><li>Ernährungsberatung</li><li>1x Personal Training/Monat</li><li>Sauna & Wellness</li></ul><button class="btn-mitgl" onclick="window.location='#probetraining'">Jetzt starten</button></div>
+    <div class="mitgl-card"><div class="mitgl-badge">Premium</div><div class="mitgl-name">ELITE</div><div class="mitgl-price">149 €</div><div class="mitgl-period">pro Monat · monatlich kündbar</div><ul class="mitgl-features"><li>Alles aus PRO</li><li>4x Personal Training/Monat</li><li>Individueller Trainingsplan</li><li>Körperanalyse monatlich</li><li>Supplement-Beratung</li><li>VIP-Bereich Zugang</li></ul><button class="btn-mitgl" onclick="window.location='#probetraining'">Jetzt starten</button></div>
+  </div>
+</section>
+
+<section id="trainer">
+  <div class="sec-tag">Unser Team</div>
+  <h2 class="sec-title">DIE <span>TRAINER</span></h2>
+  <div class="trainer-grid">
+    <div class="trainer-card"><div class="trainer-avatar ta1">M</div><div class="trainer-name">MIKE SCHULZ</div><div class="trainer-spec">Strength & Powerlifting</div><p class="trainer-cert">B-Lizenz DBS · 8 Jahre Erfahrung</p></div>
+    <div class="trainer-card"><div class="trainer-avatar ta2">J</div><div class="trainer-name">JANA WEBER</div><div class="trainer-spec">HIIT & Functional</div><p class="trainer-cert">AFAA Zertifiziert · 6 Jahre Erfahrung</p></div>
+    <div class="trainer-card"><div class="trainer-avatar ta3">T</div><div class="trainer-name">TOM RICHTER</div><div class="trainer-spec">Yoga & Mobility</div><p class="trainer-cert">RYT-500 · 10 Jahre Erfahrung</p></div>
+    <div class="trainer-card"><div class="trainer-avatar ta4">S</div><div class="trainer-name">SARA MÜLLER</div><div class="trainer-spec">Ernährung & Körperbau</div><p class="trainer-cert">ISSN Certified · 5 Jahre Erfahrung</p></div>
+  </div>
+</section>
+
+<section id="probetraining">
+  <div class="probe-wrap">
+    <div class="probe-info">
+      <div class="sec-tag">Kostenlos testen</div>
+      <h2>PROBETRAINING <span>BUCHEN</span></h2>
+      <p>Überzeuge dich selbst – ein kostenloses Probetraining mit persönlicher Betreuung. Kein Druck, keine Verpflichtung.</p>
+      <div class="pi-detail"><div class="pi-icon">📍</div><div class="pi-text"><strong>Adresse</strong><span>Immermannstr. 40, 40210 Düsseldorf</span></div></div>
+      <div class="pi-detail"><div class="pi-icon">📞</div><div class="pi-text"><strong>Telefon</strong><span>0211 / 555 666 77</span></div></div>
+      <div class="pi-detail"><div class="pi-icon">🕐</div><div class="pi-text"><strong>Öffnungszeiten</strong><span>24/7 · Büro Mo–Fr: 8:00–20:00</span></div></div>
+    </div>
+    <div class="probe-form">
+      <div class="pf-title">PROBETRAINING BUCHEN</div>
+      <div id="probe-fields">
+        <div class="fg-row">
+          <div class="fg"><label>Vorname</label><input type="text" placeholder="Max"/></div>
+          <div class="fg"><label>Nachname</label><input type="text" placeholder="Mustermann"/></div>
+        </div>
+        <div class="fg"><label>Ziel</label><select><option>Muskelaufbau</option><option>Fett verlieren</option><option>Fitness verbessern</option><option>Wettkampfvorbereitung</option><option>Gesundheit & Wohlbefinden</option></select></div>
+        <div class="fg-row">
+          <div class="fg"><label>Wunschdatum</label><input type="date"/></div>
+          <div class="fg"><label>Uhrzeit</label><select><option>07:00 Uhr</option><option>09:00 Uhr</option><option>11:00 Uhr</option><option selected>17:00 Uhr</option><option>18:00 Uhr</option><option>19:00 Uhr</option></select></div>
+        </div>
+        <div class="fg"><label>Telefon</label><input type="tel" placeholder="0211 ..."/></div>
+        <button class="btn-probe" onclick="document.getElementById('probe-fields').style.display='none';document.querySelector('.probe-success').style.display='block'">PROBETRAINING BUCHEN →</button>
+      </div>
+      <div class="probe-success"><h4>LET'S GO! 💪</h4><p>Wir bestätigen dein Probetraining innerhalb von 2 Stunden. See you at FORGE!</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div><div class="f-logo">FORGE<span>.</span></div><p class="f-desc">Premium Fitnessstudio Düsseldorf · 24/7 · Keine Ausreden.</p></div>
+    <div class="f-col"><div class="f-col-title">Training</div><a href="#">Kurse</a><a href="#">Personal Training</a><a href="#">Powerlifting</a><a href="#">Ernährung</a></div>
+    <div class="f-col"><div class="f-col-title">Kontakt</div><p>Immermannstr. 40, Düsseldorf</p><a href="#">0211 / 555 666 77</a><a href="#">info@forge-gym.de</a></div>
+  </div>
+  <div class="f-bottom"><span>© 2025 FORGE Fitness Düsseldorf</span><span style="color:var(--border);font-size:10px">Website by KL Web Design</span></div>
+</footer>
+
+<script>
+(function(){
+  const c=document.getElementById('hero-canvas');if(!c)return;
+  const ctx=c.getContext('2d');let W,H,t=0;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const pts=[];for(let i=0;i<80;i++)pts.push({x:Math.random(),y:Math.random(),vx:(Math.random()-0.5)*0.0003,vy:(Math.random()-0.5)*0.0003,r:Math.random()*1.8+0.3,a:Math.random()*0.25+0.05});
+  function frame(){
+    t+=0.007;ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#050506');bg.addColorStop(1,'#100508');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    // Grid
+    ctx.save();ctx.globalAlpha=0.04;ctx.strokeStyle='#c82020';ctx.lineWidth=1;
+    for(let x=0;x<W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(let y=0;y<H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    ctx.restore();
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=1;if(p.x>1)p.x=0;if(p.y<0)p.y=1;if(p.y>1)p.y=0;ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,32,32,${p.a})`;ctx.fill()});
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=(pts[i].x-pts[j].x)*W,dy=(pts[i].y-pts[j].y)*H,d=Math.sqrt(dx*dx+dy*dy);if(d<80){ctx.beginPath();ctx.moveTo(pts[i].x*W,pts[i].y*H);ctx.lineTo(pts[j].x*W,pts[j].y*H);ctx.strokeStyle=`rgba(200,32,32,${(1-d/80)*0.06})`;ctx.lineWidth=0.5;ctx.stroke()}}
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+const revealEls=document.querySelectorAll('.kurs-card,.mitgl-card,.trainer-card');
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),(e.target.dataset.i||0)*80)})},{threshold:0.1});
+revealEls.forEach((el,i)=>{el.dataset.i=i%5;io.observe(el)});
+</script>
+</body>
+</html>

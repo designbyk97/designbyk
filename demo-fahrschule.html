@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fahrschule DriveUp – Düsseldorf</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--black:#080c10;--dark:#0f1520;--card:#141d28;--border:#1e2a38;--orange:#e85d20;--orange-light:#f07040;--orange-dim:#7a2a08;--blue:#1a3a6a;--white:#eef2f8;--grey:#8a9ab0;--dim:#4a5a70}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--white);font-family:'Space Grotesk',sans-serif;font-weight:300;overflow-x:hidden}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw}
+    .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--white);text-decoration:none;letter-spacing:0.04em}
+    .nav-logo span{color:var(--orange)}
+    .nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav-links a{font-size:13px;font-weight:400;color:var(--grey);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
+    .nav-links a:hover{color:var(--orange)}
+    .nav-cta{background:var(--orange)!important;color:var(--black)!important;padding:9px 20px;font-weight:600!important}
+    .nav-cta:hover{background:var(--orange-light)!important}
+
+    #hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:100px 6vw 60px;overflow:hidden;background:linear-gradient(135deg,#080c10 0%,#0f1a28 60%,#080c10 100%)}
+    #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0.8}
+
+    .hero-content{position:relative;z-index:2;max-width:620px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(232,93,32,0.12);border:1px solid rgba(232,93,32,0.25);color:var(--orange-light);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:6px 14px;margin-bottom:24px;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+    .hero-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(52px,7vw,100px);line-height:0.95;letter-spacing:0.01em;color:var(--white);margin-bottom:24px;opacity:0;animation:fadeUp 0.8s 0.4s forwards}
+    .hero-title span{color:var(--orange)}
+    .hero-sub{font-size:15px;line-height:1.8;color:var(--grey);max-width:480px;margin-bottom:40px;opacity:0;animation:fadeUp 0.8s 0.6s forwards}
+    .hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s 0.8s forwards}
+    .btn-or{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--black);font-weight:600;font-size:13px;letter-spacing:0.06em;padding:14px 28px;text-decoration:none;transition:background 0.2s,transform 0.15s}
+    .btn-or:hover{background:var(--orange-light);transform:translateY(-2px)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);color:var(--grey);font-size:13px;padding:14px 28px;text-decoration:none;transition:all 0.2s}
+    .btn-ghost:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px)}
+
+    .hero-stats{display:flex;gap:2px;margin-top:52px;opacity:0;animation:fadeUp 0.8s 1s forwards}
+    .hs{background:var(--card);border:1px solid var(--border);padding:20px 24px;flex:1}
+    .hs-num{font-family:'Syne',sans-serif;font-weight:800;font-size:32px;color:var(--orange);line-height:1}
+    .hs-label{font-size:11px;color:var(--dim);margin-top:4px;letter-spacing:0.05em}
+
+    section{padding:100px 6vw}
+    .sec-tag{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+    .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1;letter-spacing:0.01em;margin-bottom:16px}
+    .sec-title span{color:var(--orange)}
+    .sec-sub{font-size:14px;line-height:1.8;color:var(--grey);max-width:500px;margin-bottom:60px}
+
+    #pakete{background:var(--dark)}
+    .pakete-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+    .paket-card{background:var(--card);border:1px solid var(--border);padding:36px 28px;position:relative;opacity:0;transform:translateY(24px)}
+    .paket-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .paket-card.featured{border-color:var(--orange)}
+    .paket-badge{font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+    .paket-name{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;margin-bottom:6px}
+    .paket-price{font-family:'Syne',sans-serif;font-weight:700;font-size:42px;color:var(--orange);line-height:1;margin-bottom:4px}
+    .paket-period{font-size:12px;color:var(--dim);margin-bottom:24px}
+    .paket-features{list-style:none;margin-bottom:28px}
+    .paket-features li{font-size:13px;color:var(--grey);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+    .paket-features li::before{content:'✓';color:var(--orange);font-size:10px;font-weight:700}
+    .btn-paket{display:block;text-align:center;background:none;border:1px solid var(--border);color:var(--grey);font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:12px;text-decoration:none;cursor:pointer;transition:all 0.2s;width:100%}
+    .btn-paket:hover{border-color:var(--orange);color:var(--orange)}
+    .paket-card.featured .btn-paket{background:var(--orange);border-color:var(--orange);color:var(--black)}
+    .paket-card.featured .btn-paket:hover{background:var(--orange-light)}
+
+    #ablauf{background:var(--black)}
+    .ablauf-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px;position:relative}
+    .ablauf-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange-light),var(--orange))}
+    .ablauf-step{padding:0 16px;padding-top:56px;text-align:center;opacity:0;transform:translateY(20px)}
+    .ablauf-step.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .as-dot{width:14px;height:14px;border-radius:50%;background:var(--orange);margin:0 auto;position:absolute;top:22px;left:50%;transform:translateX(-50%);box-shadow:0 0 16px rgba(232,93,32,0.5)}
+    .as-num{font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--orange);letter-spacing:0.15em;margin-bottom:10px}
+    .as-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px}
+    .as-desc{font-size:12px;color:var(--dim);line-height:1.65}
+
+    #fuehrerscheine{background:var(--dark)}
+    .fs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+    .fs-card{background:var(--card);border:1px solid var(--border);padding:28px 20px;text-align:center;transition:border-color 0.2s,background 0.2s;opacity:0;transform:translateY(20px)}
+    .fs-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease,border-color 0.2s}
+    .fs-card:hover{border-color:var(--orange);background:#161e28}
+    .fs-class{font-family:'Syne',sans-serif;font-weight:800;font-size:36px;color:var(--orange);line-height:1;margin-bottom:8px}
+    .fs-name{font-size:13px;font-weight:600;color:var(--white);margin-bottom:6px}
+    .fs-desc{font-size:11px;color:var(--dim);line-height:1.5}
+
+    #anmelden{background:var(--black)}
+    .anmelden-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:start}
+    .anmelden-info h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,44px);margin-bottom:16px}
+    .anmelden-info h2 span{color:var(--orange)}
+    .anmelden-info p{font-size:14px;line-height:1.8;color:var(--grey);margin-bottom:28px}
+    .ai-detail{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:13px}
+    .ai-icon{width:36px;height:36px;background:rgba(232,93,32,0.1);border:1px solid rgba(232,93,32,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .ai-text strong{display:block;font-size:10px;color:var(--orange);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px}
+    .anmelden-form{background:var(--card);border:1px solid var(--border);padding:36px}
+    .af-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:var(--orange);margin-bottom:24px}
+    .fg{margin-bottom:16px}
+    .fg label{display:block;font-size:10px;font-weight:600;color:var(--grey);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:7px}
+    .fg input,.fg select{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;border-radius:0}
+    .fg input:focus,.fg select:focus{border-color:var(--orange)}
+    .fg select option{background:var(--card)}
+    .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .btn-anmelden{width:100%;background:var(--orange);color:var(--black);border:none;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;padding:15px;cursor:pointer;transition:background 0.2s;margin-top:8px}
+    .btn-anmelden:hover{background:var(--orange-light)}
+    .a-success{display:none;text-align:center;padding:40px}
+    .a-success h4{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:var(--orange);margin-bottom:10px}
+    .a-success p{font-size:13px;color:var(--grey)}
+
+    #reviews-du{background:var(--dark)}
+    .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
+    .rev-card{background:var(--card);border:1px solid var(--border);padding:28px;opacity:0;transform:translateY(20px)}
+    .rev-card.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease}
+    .rev-stars{color:var(--orange);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+    .rev-text{font-size:14px;line-height:1.7;color:var(--grey);margin-bottom:16px;font-style:italic}
+    .rev-author{display:flex;align-items:center;gap:10px}
+    .rev-av{width:36px;height:36px;border-radius:50%;background:var(--orange);color:var(--black);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+    .rev-name{font-size:13px;font-weight:600}
+    .rev-date{font-size:11px;color:var(--dim);margin-top:2px}
+
+    footer{background:var(--dark);border-top:1px solid var(--border);padding:48px 6vw 28px}
+    .ft{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:60px;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--border)}
+    .f-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--white);margin-bottom:10px}
+    .f-logo span{color:var(--orange)}
+    .f-desc{font-size:12px;color:var(--dim);line-height:1.7}
+    .f-col-title{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+    .f-col a,.f-col p{display:block;font-size:12px;color:var(--dim);text-decoration:none;margin-bottom:7px;transition:color 0.2s}
+    .f-col a:hover{color:var(--orange)}
+    .f-bottom{display:flex;justify-content:space-between;font-size:11px;color:var(--dim);flex-wrap:wrap;gap:10px}
+
+    @media(max-width:900px){.pakete-grid{grid-template-columns:1fr}.fs-grid{grid-template-columns:1fr 1fr}.ablauf-steps{grid-template-columns:1fr 1fr}.ablauf-steps::before{display:none}.anmelden-wrap{grid-template-columns:1fr;gap:40px}.rev-grid{grid-template-columns:1fr}.ft{grid-template-columns:1fr;gap:28px}nav .nav-links{display:none}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">Drive<span>Up</span></a>
+  <ul class="nav-links">
+    <li><a href="#pakete">Pakete</a></li>
+    <li><a href="#fuehrerscheine">Führerscheine</a></li>
+    <li><a href="#ablauf">Ablauf</a></li>
+    <li><a href="#anmelden" class="nav-cta">Jetzt anmelden</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">Fahrschule Düsseldorf · Seit 1998</div>
+    <h1 class="hero-title">Dein Weg.<br>Dein <span>Führerschein.</span></h1>
+    <p class="hero-sub">Moderne Ausbildung, erfahrene Fahrlehrer und eine Bestehensquote von 94% – DriveUp macht dich sicher auf die Straße.</p>
+    <div class="hero-btns">
+      <a href="#anmelden" class="btn-or">Jetzt anmelden →</a>
+      <a href="#pakete" class="btn-ghost">Pakete ansehen</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-num">94%</div><div class="hs-label">Bestehensquote</div></div>
+      <div class="hs"><div class="hs-num">2.800+</div><div class="hs-label">Führerscheine</div></div>
+      <div class="hs"><div class="hs-num">25+</div><div class="hs-label">Jahre Erfahrung</div></div>
+      <div class="hs"><div class="hs-num">4.8★</div><div class="hs-label">Google Bewertung</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="fuehrerscheine">
+  <div class="sec-tag">Was wir anbieten</div>
+  <h2 class="sec-title">Alle <span>Führerschein</span>klassen</h2>
+  <p class="sec-sub">Von Klasse B bis zum Motorrad – wir bilden dich in allen Führerscheinklassen aus.</p>
+  <div class="fs-grid">
+    <div class="fs-card"><div class="fs-class">B</div><div class="fs-name">PKW</div><div class="fs-desc">Der klassische Führerschein für PKW und leichte Transporter</div></div>
+    <div class="fs-card"><div class="fs-class">A</div><div class="fs-name">Motorrad</div><div class="fs-desc">Motorrad in allen Klassen – A1, A2 und A</div></div>
+    <div class="fs-card"><div class="fs-class">BE</div><div class="fs-name">Anhänger</div><div class="fs-desc">PKW mit Anhänger bis 3,5 Tonnen zGG</div></div>
+    <div class="fs-card"><div class="fs-class">C</div><div class="fs-name">LKW</div><div class="fs-desc">LKW über 3,5 Tonnen für den Berufskraftfahrer</div></div>
+    <div class="fs-card"><div class="fs-class">B96</div><div class="fs-name">Erweiterung</div><div class="fs-desc">Anhänger bis 4,25 Tonnen – nur 1 Tag Ausbildung</div></div>
+    <div class="fs-card"><div class="fs-class">AM</div><div class="fs-name">Mofa</div><div class="fs-desc">Kleinkrafträder und Mofas ab 16 Jahren</div></div>
+    <div class="fs-card"><div class="fs-class">T</div><div class="fs-name">Traktor</div><div class="fs-desc">Land- und forstwirtschaftliche Zugmaschinen</div></div>
+    <div class="fs-card"><div class="fs-class">MPU</div><div class="fs-name">Vorbereitung</div><div class="fs-desc">Professionelle MPU-Vorbereitung mit Garantie</div></div>
+  </div>
+</section>
+
+<section id="pakete">
+  <div class="sec-tag">Unsere Angebote</div>
+  <h2 class="sec-title">Pakete &amp; <span>Preise</span></h2>
+  <p class="sec-sub">Transparente Preise ohne versteckte Kosten. Alle Pakete inklusive Theorie und Pflichtstunden.</p>
+  <div class="pakete-grid">
+    <div class="paket-card">
+      <div class="paket-badge">Starter</div>
+      <div class="paket-name">Basic</div>
+      <div class="paket-price">1.499 €</div>
+      <div class="paket-period">Gesamtpreis inkl. MwSt.</div>
+      <ul class="paket-features">
+        <li>Theorieunterricht (14 Doppelstunden)</li>
+        <li>12 Pflichtfahrstunden</li>
+        <li>3 Überlandfahrten</li>
+        <li>1 Autobahnfahrt</li>
+        <li>1 Nachtfahrt</li>
+        <li>Anmeldung TÜV/DEKRA</li>
+      </ul>
+      <a href="#anmelden" class="btn-paket">Jetzt anmelden</a>
+    </div>
+    <div class="paket-card featured">
+      <div class="paket-badge">Beliebt · Empfohlen</div>
+      <div class="paket-name">Intensiv</div>
+      <div class="paket-price">1.899 €</div>
+      <div class="paket-period">Gesamtpreis inkl. MwSt.</div>
+      <ul class="paket-features">
+        <li>Alles aus Basic</li>
+        <li>20 Fahrstunden (8 extra)</li>
+        <li>Intensivtheorie-Wochenende</li>
+        <li>Simulator-Training</li>
+        <li>Prüfungsgarantie</li>
+        <li>Persönlicher Fahrlehrer</li>
+      </ul>
+      <a href="#anmelden" class="btn-paket">Jetzt anmelden</a>
+    </div>
+    <div class="paket-card">
+      <div class="paket-badge">Premium</div>
+      <div class="paket-name">VIP</div>
+      <div class="paket-price">2.499 €</div>
+      <div class="paket-period">Gesamtpreis inkl. MwSt.</div>
+      <ul class="paket-features">
+        <li>Alles aus Intensiv</li>
+        <li>Unbegrenzte Fahrstunden</li>
+        <li>Fahrschulwagen auch privat</li>
+        <li>Eco-Drive Kurs</li>
+        <li>Notfalltraining</li>
+        <li>Lebenslanger Support</li>
+      </ul>
+      <a href="#anmelden" class="btn-paket">Jetzt anmelden</a>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf">
+  <div class="sec-tag">So funktioniert's</div>
+  <h2 class="sec-title">Vom Start zum <span>Führerschein</span></h2>
+  <div class="ablauf-steps">
+    <div class="ablauf-step"><div class="as-dot"></div><div class="as-num">Schritt 01</div><h3 class="as-title">Anmeldung</h3><p class="as-desc">Online oder persönlich anmelden – wir kümmern uns um die Formalitäten.</p></div>
+    <div class="ablauf-step"><div class="as-dot"></div><div class="as-num">Schritt 02</div><h3 class="as-title">Theorie</h3><p class="as-desc">14 Doppelstunden Theorie, App-Lernen und Online-Tests.</p></div>
+    <div class="ablauf-step"><div class="as-dot"></div><div class="as-num">Schritt 03</div><h3 class="as-title">Fahrstunden</h3><p class="as-desc">Praxisausbildung mit erfahrenen Fahrlehrern – flexibel nach Zeitplan.</p></div>
+    <div class="ablauf-step"><div class="as-dot"></div><div class="as-num">Schritt 04</div><h3 class="as-title">Führerschein</h3><p class="as-desc">Theorie- und Fahrprüfung beim TÜV/DEKRA – wir begleiten dich.</p></div>
+  </div>
+</section>
+
+<section id="reviews-du">
+  <div class="sec-tag">Was Schüler sagen</div>
+  <h2 class="sec-title">Echte <span>Bewertungen</span></h2>
+  <div class="rev-grid">
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><p class="rev-text">"Beim ersten Versuch bestanden! Mein Fahrlehrer war super geduldig und hat mir wirklich Sicherheit gegeben."</p><div class="rev-author"><div class="rev-av">J</div><div><div class="rev-name">Jonas K.</div><div class="rev-date">Google · vor 3 Tagen</div></div></div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><p class="rev-text">"Das Intensivpaket war perfekt. In 6 Wochen zum Führerschein – ich hätte nicht gedacht dass das so schnell geht."</p><div class="rev-author"><div class="rev-av">L</div><div><div class="rev-name">Lena S.</div><div class="rev-date">Google · vor 1 Woche</div></div></div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><p class="rev-text">"Faire Preise, top Ausbildung. Kein Druck, kein Stress – einfach gute Fahrschule. Weiter so!"</p><div class="rev-author"><div class="rev-av">M</div><div><div class="rev-name">Max T.</div><div class="rev-date">Google · vor 2 Wochen</div></div></div></div>
+  </div>
+</section>
+
+<section id="anmelden">
+  <div class="anmelden-wrap">
+    <div class="anmelden-info">
+      <div class="sec-tag">Jetzt starten</div>
+      <h2>Melde dich <span>jetzt an</span></h2>
+      <p>Starte noch heute deine Führerscheinausbildung. Wir melden uns innerhalb von 24 Stunden und besprechen deinen persönlichen Zeitplan.</p>
+      <div class="ai-detail"><div class="ai-icon">📍</div><div class="ai-text"><strong>Adresse</strong><span>Graf-Adolf-Str. 15, 40213 Düsseldorf</span></div></div>
+      <div class="ai-detail"><div class="ai-icon">📞</div><div class="ai-text"><strong>Telefon</strong><span>0211 / 456 789 01</span></div></div>
+      <div class="ai-detail"><div class="ai-icon">🕐</div><div class="ai-text"><strong>Bürozeiten</strong><span>Mo–Fr: 9:00–18:00 · Sa: 10:00–14:00</span></div></div>
+    </div>
+    <div class="anmelden-form">
+      <div class="af-title">Anmeldeformular</div>
+      <div id="anmelde-fields">
+        <div class="fg-row">
+          <div class="fg"><label>Vorname</label><input type="text" placeholder="Max"/></div>
+          <div class="fg"><label>Nachname</label><input type="text" placeholder="Mustermann"/></div>
+        </div>
+        <div class="fg"><label>Führerscheinklasse</label><select><option>Klasse B (PKW)</option><option>Klasse A (Motorrad)</option><option>Klasse BE (mit Anhänger)</option><option>Klasse C (LKW)</option><option>Klasse B96</option><option>Klasse AM (Mofa)</option></select></div>
+        <div class="fg"><label>Gewünschtes Paket</label><select><option>Basic – 1.499 €</option><option selected>Intensiv – 1.899 €</option><option>VIP – 2.499 €</option></select></div>
+        <div class="fg"><label>Telefon</label><input type="tel" placeholder="0211 ..."/></div>
+        <div class="fg"><label>E-Mail</label><input type="email" placeholder="mail@beispiel.de"/></div>
+        <button class="btn-anmelden" onclick="document.getElementById('anmelde-fields').style.display='none';document.querySelector('.a-success').style.display='block'">Jetzt anmelden →</button>
+      </div>
+      <div class="a-success"><h4>🚗 Anmeldung erhalten!</h4><p>Wir melden uns innerhalb von 24 Stunden. Willkommen bei DriveUp!</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div><div class="f-logo">Drive<span>Up</span></div><p class="f-desc">Fahrschule Düsseldorf seit 1998 · Moderne Ausbildung · 94% Bestehensquote</p></div>
+    <div class="f-col"><div class="f-col-title">Führerscheine</div><a href="#">Klasse B</a><a href="#">Klasse A</a><a href="#">Klasse C</a><a href="#">Alle Klassen</a></div>
+    <div class="f-col"><div class="f-col-title">Kontakt</div><p>Graf-Adolf-Str. 15, Düsseldorf</p><a href="#">0211 / 456 789 01</a><a href="#">info@driveup-dus.de</a></div>
+  </div>
+  <div class="f-bottom"><span>© 2025 DriveUp Fahrschule Düsseldorf</span><span style="color:var(--border);font-size:10px">Website by KL Web Design</span></div>
+</footer>
+
+<script>
+// Hero road animation
+(function(){
+  const c=document.getElementById('hero-canvas');if(!c)return;
+  const ctx=c.getContext('2d');let W,H,t=0;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const particles=[];
+  for(let i=0;i<60;i++)particles.push({x:Math.random(),y:Math.random(),vx:(Math.random()-0.5)*0.0002,vy:(Math.random()-0.5)*0.0002,r:Math.random()*1.5+0.3,alpha:Math.random()*0.3+0.05});
+  function frame(){
+    t+=0.008;ctx.clearRect(0,0,W,H);
+    const bg=ctx.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#080c10');bg.addColorStop(1,'#0f1a28');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    // Road lines
+    ctx.save();ctx.globalAlpha=0.08;ctx.strokeStyle='#e85d20';ctx.lineWidth=2;ctx.setLineDash([60,40]);
+    for(let i=0;i<3;i++){const x=W*(0.3+i*0.2);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+Math.sin(t+i)*30,H);ctx.stroke()}
+    ctx.setLineDash([]);ctx.restore();
+    particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=1;if(p.x>1)p.x=0;if(p.y<0)p.y=1;if(p.y>1)p.y=0;ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,93,32,${p.alpha})`;ctx.fill()});
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+const revealEls=document.querySelectorAll('.paket-card,.fs-card,.ablauf-step,.rev-card');
+const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),(e.target.dataset.i||0)*80)})},{threshold:0.1});
+revealEls.forEach((el,i)=>{el.dataset.i=i%5;io.observe(el)});
+</script>
+</body>
+</html>

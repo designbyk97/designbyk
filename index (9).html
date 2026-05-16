@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>designbyk — Web · Branding · Motion · Düsseldorf</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --grey: #f4f4f2;
+  --mid: #888;
+  --light: #e0e0de;
+  --dark2: #141414;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 22px 48px; transition: all 0.3s ease; }
+nav.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid var(--light); padding: 14px 48px; }
+.nav-logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -0.03em; color: var(--black); text-decoration: none; }
+.nav-logo em { font-style: normal; border-bottom: 3px solid var(--black); }
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none; opacity: 0.45; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+.nav-cta { background: var(--black) !important; color: var(--white) !important; opacity: 1 !important; padding: 10px 22px; font-weight: 600 !important; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 72px; position: relative; overflow: hidden; }
+.hero-bg-word { position: absolute; bottom: -40px; right: -20px; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(160px, 22vw, 300px); color: transparent; -webkit-text-stroke: 1px rgba(0,0,0,0.04); pointer-events: none; user-select: none; letter-spacing: -0.04em; line-height: 1; }
+.hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 28px; animation: fadeUp 0.7s ease 0.1s both; }
+.hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--mid); }
+.hero-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(52px, 7.5vw, 108px); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 48px; animation: fadeUp 0.7s ease 0.2s both; }
+.hero-title .outline { -webkit-text-stroke: 2px var(--black); color: transparent; }
+.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; animation: fadeUp 0.7s ease 0.35s both; flex-wrap: wrap; gap: 32px; }
+.hero-desc { max-width: 360px; font-size: 15px; line-height: 1.75; color: var(--mid); font-weight: 300; }
+.hero-desc strong { color: var(--black); font-weight: 500; }
+.hero-right { display: flex; flex-direction: column; align-items: flex-end; gap: 20px; }
+.hero-stats { display: flex; gap: 32px; }
+.hero-stat-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 32px; letter-spacing: -0.02em; line-height: 1; text-align: right; }
+.hero-stat-label { font-size: 11px; color: var(--mid); margin-top: 2px; text-align: right; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; text-decoration: none; transition: transform 0.2s; border: none; cursor: pointer; }
+.btn:hover { transform: translateY(-2px); }
+.btn-dark { background: var(--black); color: var(--white); }
+.btn-dark:hover { background: #222; }
+.btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
+.btn-outline:hover { background: var(--black); color: var(--white); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+
+/* MARQUEE */
+.marquee-bar { background: var(--black); padding: 15px 0; overflow: hidden; white-space: nowrap; }
+.marquee-inner { display: inline-flex; animation: marquee 18s linear infinite; }
+.marquee-item { display: inline-flex; align-items: center; gap: 18px; padding: 0 24px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.22); }
+.marquee-dot { width: 3px; height: 3px; background: rgba(255,255,255,0.15); border-radius: 50%; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTIONS */
+section { padding: 100px 48px; }
+.section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mid); display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--mid); }
+.section-title { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: clamp(36px, 5vw, 62px); line-height: 0.95; letter-spacing: -0.02em; }
+
+/* LEISTUNGEN */
+#leistungen { background: var(--grey); }
+.section-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 24px; }
+.section-desc { max-width: 400px; font-size: 15px; line-height: 1.7; color: var(--mid); font-weight: 300; }
+.leistungen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.leistung-card { background: var(--white); padding: 36px 30px; position: relative; overflow: hidden; transition: transform 0.3s; }
+.leistung-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--black); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+.leistung-card:hover { transform: translateY(-4px); }
+.leistung-card:hover::after { transform: scaleX(1); }
+.leistung-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 11px; color: var(--light); letter-spacing: 0.1em; margin-bottom: 28px; }
+.leistung-icon { font-size: 28px; margin-bottom: 16px; }
+.leistung-title { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.01em; margin-bottom: 10px; }
+.leistung-text { font-size: 13px; line-height: 1.7; color: var(--mid); font-weight: 300; }
+
+/* PORTFOLIO */
+#portfolio { background: var(--white); }
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
+.portfolio-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
+.portfolio-card-inner { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px; position: relative; transition: transform 0.4s ease; }
+.portfolio-card:hover .portfolio-card-inner { transform: scale(1.03); }
+.portfolio-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 72px; letter-spacing: -0.03em; opacity: 0.1; pointer-events: none; }
+.portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
+.portfolio-card:hover .portfolio-overlay { opacity: 1; }
+.portfolio-info { position: relative; z-index: 2; transform: translateY(8px); opacity: 0; transition: all 0.3s; }
+.portfolio-card:hover .portfolio-info { transform: translateY(0); opacity: 1; }
+.portfolio-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 5px; }
+.portfolio-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px; color: #fff; letter-spacing: -0.01em; }
+.portfolio-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6); margin-top: 8px; text-decoration: none; transition: color 0.2s; }
+.portfolio-link:hover { color: #fff; }
+.portfolio-grid .portfolio-card:nth-child(4) { grid-column: span 2; }
+
+.card-restaurant { background: #1a0f08; } .card-restaurant .portfolio-bg { color: #b8963e; }
+.card-barbershop { background: #080808; } .card-barbershop .portfolio-bg { color: #c8a830; }
+.card-fahrschule { background: #0a1628; } .card-fahrschule .portfolio-bg { color: #4488ff; }
+.card-zahnarzt { background: #e8eef4; } .card-zahnarzt .portfolio-bg { color: #4a7fa0; font-size: 56px; }
+.card-fitness { background: #0f0f0f; } .card-fitness .portfolio-bg { color: #ff4422; }
+.card-salon { background: #2a1a1a; } .card-salon .portfolio-bg { color: #c8887a; }
+.card-elektro { background: #1a1500; } .card-elektro .portfolio-bg { color: #F5B800; }
+
+/* KONTAKT */
+#kontakt { background: var(--black); color: var(--white); }
+.kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.kontakt-left .section-eyebrow { color: rgba(255,255,255,0.25); }
+.kontakt-left .section-eyebrow::before { background: rgba(255,255,255,0.15); }
+.kontakt-left .section-title { color: var(--white); }
+.kontakt-desc { margin-top: 20px; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,0.35); font-weight: 300; }
+.kontakt-items { margin-top: 40px; display: flex; flex-direction: column; gap: 18px; }
+.kontakt-item { display: flex; align-items: center; gap: 14px; }
+.kontakt-item-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.kontakt-item-label { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 300; }
+.kontakt-item-value { font-size: 14px; color: var(--white); font-weight: 500; margin-bottom: 2px; }
+
+.form-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 36px 32px; }
+.form-group { margin-bottom: 14px; }
+.form-label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 8px; }
+.form-input, .form-textarea, .form-select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--white); padding: 13px 15px; font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; appearance: none; }
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.18); }
+.form-input:focus, .form-textarea:focus, .form-select:focus { border-color: rgba(255,255,255,0.25); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-submit { width: 100%; background: var(--white); color: var(--black); padding: 15px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; border: none; margin-top: 8px; transition: background 0.2s, transform 0.2s; }
+.form-submit:hover { background: #e8e8e8; transform: translateY(-2px); }
+.form-success { display: none; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); padding: 14px; text-align: center; font-size: 14px; margin-top: 12px; }
+
+/* FOOTER */
+footer { background: #060606; border-top: 1px solid rgba(255,255,255,0.04); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -0.03em; color: var(--white); }
+.footer-logo em { font-style: normal; border-bottom: 2px solid rgba(255,255,255,0.35); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 12px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: rgba(255,255,255,0.5); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  nav.scrolled { padding: 12px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 20px 56px; }
+  section { padding: 64px 20px; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
+  .hero-right { align-items: flex-start; }
+  .btns { justify-content: flex-start; }
+  .leistungen-grid { grid-template-columns: 1fr 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  .portfolio-grid .portfolio-card:nth-child(4) { grid-column: span 1; }
+  .kontakt-grid { grid-template-columns: 1fr; gap: 40px; }
+  footer { padding: 24px 20px; }
+}
+@media (max-width: 480px) {
+  .leistungen-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">design<em>byk</em></a>
+  <ul class="nav-links">
+    <li><a href="#leistungen">Leistungen</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="#kontakt" class="nav-cta">Projekt anfragen</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-word">byk</div>
+  <div class="hero-tag">Creative Studio · Düsseldorf</div>
+  <h1 class="hero-title">
+    Websites &<br>
+    <span class="outline">Brands</span><br>
+    die wirken.
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">Ich entwerfe <strong>digitale Erlebnisse</strong> — von der ersten Idee bis zur fertigen Website. Web Design, Branding, Logo & Motion aus einer Hand.</p>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">7+</div>
+          <div class="hero-stat-label">Projekte</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">Maßarbeit</div>
+        </div>
+      </div>
+      <div class="btns">
+        <a href="#portfolio" class="btn btn-outline">Portfolio ansehen</a>
+        <a href="#kontakt" class="btn btn-dark">Projekt starten →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <div class="marquee-item">Web Design <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Branding <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Logo Design <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Logo Animation <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Grafik Design <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Landing Pages <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Corporate Identity <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Web Design <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Branding <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Logo Design <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Logo Animation <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Grafik Design <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Landing Pages <span class="marquee-dot"></span></div>
+    <div class="marquee-item">Corporate Identity <span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- LEISTUNGEN -->
+<section id="leistungen">
+  <div class="section-top reveal">
+    <div>
+      <div class="section-eyebrow">Was ich mache</div>
+      <h2 class="section-title">Leistungen</h2>
+    </div>
+    <p class="section-desc">Von der ersten Skizze bis zum fertigen Produkt — kein Outsourcing, keine Templates, keine Kompromisse.</p>
+  </div>
+  <div class="leistungen-grid reveal">
+    <div class="leistung-card">
+      <div class="leistung-num">01</div>
+      <div class="leistung-icon">🌐</div>
+      <div class="leistung-title">Web Design</div>
+      <div class="leistung-text">Moderne, schnelle Websites die konvertieren. Maßgeschneidert — kein Template, kein Baukastensystem.</div>
+    </div>
+    <div class="leistung-card">
+      <div class="leistung-num">02</div>
+      <div class="leistung-icon">✦</div>
+      <div class="leistung-title">Branding & CI</div>
+      <div class="leistung-text">Komplette Corporate Identity — Logo, Farben, Schriften, Visitenkarten. Alles aus einem Guss.</div>
+    </div>
+    <div class="leistung-card">
+      <div class="leistung-num">03</div>
+      <div class="leistung-icon">◈</div>
+      <div class="leistung-title">Logo Design</div>
+      <div class="leistung-text">Logos die bleiben. Zeitlos, vielseitig, unverwechselbar — für Print, Digital und Social Media.</div>
+    </div>
+    <div class="leistung-card">
+      <div class="leistung-num">04</div>
+      <div class="leistung-icon">▶</div>
+      <div class="leistung-title">Logo Animation</div>
+      <div class="leistung-text">Dein Logo in Bewegung — für Videos, Reels, Präsentationen. Hinterlässt Eindruck.</div>
+    </div>
+    <div class="leistung-card">
+      <div class="leistung-num">05</div>
+      <div class="leistung-icon">◻</div>
+      <div class="leistung-title">Grafik Design</div>
+      <div class="leistung-text">Flyer, Poster, Social Media Content, Werbematerial — professionell, sofort einsetzbar.</div>
+    </div>
+    <div class="leistung-card">
+      <div class="leistung-num">06</div>
+      <div class="leistung-icon">📱</div>
+      <div class="leistung-title">Landing Pages</div>
+      <div class="leistung-text">Fokussierte Seiten mit einem Ziel — mehr Anfragen, Buchungen, Verkäufe. Für jede Branche.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-top reveal">
+    <div>
+      <div class="section-eyebrow">Meine Arbeit</div>
+      <h2 class="section-title">Portfolio</h2>
+    </div>
+    <p class="section-desc">Jedes Projekt ist ein Unikat — designed für den jeweiligen Kunden, seine Branche und seine Zielgruppe.</p>
+  </div>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-card card-restaurant">
+      <div class="portfolio-card-inner">
+        <div class="portfolio-bg">OV</div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Restaurant · Fine Dining</div>
+          <div class="portfolio-name">Osteria Venezia</div>
+          <a href="#" class="portfolio-link">Projekt ansehen →</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card card-barbershop">
+      <div class="portfolio-card-inner">
+        <div class="portfolio-bg">CR</div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Barbershop · Booking</div>
+          <div class="portfolio-name">CROWN Barbershop</div>
+          <a href="#" class="portfolio-link">Projekt ansehen →</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card card-fahrschule">
+      <div class="portfolio-card-inner">
+        <div class="portfolio-bg">DU</div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Fahrschule · Lead Gen</div>
+          <div class="portfolio-name">DriveUp Fahrschule</div>
+          <a href="#" class="portfolio-link">Projekt ansehen →</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card card-zahnarzt">
+      <div class="portfolio-card-inner">
+        <div class="portfolio-bg">DS</div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Zahnarztpraxis · Medizin</div>
+          <div class="portfolio-name">Dr. Steinberg</div>
+          <a href="#" class="portfolio-link">Projekt ansehen →</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card card-fitness">
+      <div class="portfolio-card-inner">
+        <div class="portfolio-bg">FG</div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Fitness · Premium Gym</div>
+          <div class="portfolio-name">FORGE Fitness</div>
+          <a href="#" class="portfolio-link">Projekt ansehen →</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card card-salon">
+      <div class="portfolio-card-inner">
+        <div class="portfolio-bg">SM</div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Friseur · Salon</div>
+          <div class="portfolio-name">Salon Michaela</div>
+          <a href="#" class="portfolio-link">Projekt ansehen →</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-card card-elektro">
+      <div class="portfolio-card-inner">
+        <div class="portfolio-bg">AE</div>
+        <div class="portfolio-overlay"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-tag">Elektrotechnik · Handwerk</div>
+          <div class="portfolio-name">Angelidis Elektrotechnik</div>
+          <a href="#" class="portfolio-link">Projekt ansehen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="kontakt-grid">
+    <div class="kontakt-left reveal">
+      <div class="section-eyebrow">Zusammenarbeiten</div>
+      <h2 class="section-title">Lass uns<br>reden.</h2>
+      <p class="kontakt-desc">Du hast ein Projekt, eine Idee oder willst wissen was möglich ist — schreib mir. Ich antworte innerhalb von 24 Stunden.</p>
+      <div class="kontakt-items">
+        <div class="kontakt-item">
+          <div class="kontakt-item-icon">✉</div>
+          <div>
+            <div class="kontakt-item-value">kevin@designbyk.de</div>
+            <div class="kontakt-item-label">E-Mail</div>
+          </div>
+        </div>
+        <div class="kontakt-item">
+          <div class="kontakt-item-icon">📍</div>
+          <div>
+            <div class="kontakt-item-value">Düsseldorf, Deutschland</div>
+            <div class="kontakt-item-label">Standort · Remote möglich</div>
+          </div>
+        </div>
+        <div class="kontakt-item">
+          <div class="kontakt-item-icon">⏱</div>
+          <div>
+            <div class="kontakt-item-value">Antwort in 24h</div>
+            <div class="kontakt-item-label">Mo–Fr · 9:00–18:00 Uhr</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="form-box">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Vorname *</label>
+            <input type="text" class="form-input" placeholder="Max" id="f-v">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nachname</label>
+            <input type="text" class="form-input" placeholder="Mustermann" id="f-n">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-Mail *</label>
+          <input type="email" class="form-input" placeholder="ihre@email.de" id="f-e">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Was brauchst du?</label>
+          <select class="form-select form-input" id="f-s">
+            <option value="">Bitte wählen...</option>
+            <option>Website / Landing Page</option>
+            <option>Logo Design</option>
+            <option>Branding / Corporate Identity</option>
+            <option>Logo Animation</option>
+            <option>Grafik Design</option>
+            <option>Alles zusammen</option>
+            <option>Erstmal beraten lassen</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dein Projekt *</label>
+          <textarea class="form-textarea" placeholder="Branche, Ziel, Wünsche — kurz beschreiben..." id="f-m"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Nachricht senden →</button>
+        <div class="form-success" id="f-ok">✓ Nachricht eingegangen — ich melde mich bald!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">design<em>byk</em></div>
+  <div class="footer-copy">© 2025 designbyk · Kevin Lindemann · Düsseldorf</div>
+  <div class="footer-links">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function submitForm() {
+  const v = document.getElementById('f-v').value;
+  const e = document.getElementById('f-e').value;
+  const m = document.getElementById('f-m').value;
+  if (!v || !e || !m) { alert('Bitte fülle alle Pflichtfelder aus.'); return; }
+  document.getElementById('f-ok').style.display = 'block';
+  setTimeout(() => document.getElementById('f-ok').style.display = 'none', 5000);
+}
+</script>
+</body>
+</html>
