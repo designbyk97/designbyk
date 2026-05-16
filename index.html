@@ -80,29 +80,26 @@ section { padding: 100px 48px; }
 
 /* PORTFOLIO */
 #portfolio { background: var(--white); }
-.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
-.portfolio-card { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
-.portfolio-card-inner { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px; position: relative; transition: transform 0.4s ease; }
-.portfolio-card:hover .portfolio-card-inner { transform: scale(1.03); }
-.portfolio-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 72px; letter-spacing: -0.03em; opacity: 0.1; pointer-events: none; }
-.portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; }
-.portfolio-card:hover .portfolio-overlay { opacity: 1; }
-.portfolio-info { position: relative; z-index: 2; transform: translateY(8px); opacity: 0; transition: all 0.3s; }
-.portfolio-card:hover .portfolio-info { transform: translateY(0); opacity: 1; }
-.portfolio-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 5px; }
-.portfolio-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 20px; color: #fff; letter-spacing: -0.01em; }
-.portfolio-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6); margin-top: 8px; text-decoration: none; transition: color 0.2s; }
-.portfolio-link:hover { color: #fff; }
-.portfolio-grid .portfolio-card:nth-child(4) { grid-column: span 2; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 60px; }
+.portfolio-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; text-decoration: none; display: block; transition: transform 0.3s, box-shadow 0.3s; }
+.portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,0.15); }
+.portfolio-card-inner { width: 100%; display: flex; flex-direction: column; }
+.portfolio-thumb { width: 100%; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.portfolio-thumb-logo { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 36px; letter-spacing: -0.02em; z-index: 1; text-align: center; padding: 16px; line-height: 1.1; }
+.portfolio-thumb-bg { position: absolute; inset: 0; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 90px; display: flex; align-items: center; justify-content: center; opacity: 0.07; letter-spacing: -0.04em; pointer-events: none; }
+.portfolio-body { padding: 16px 18px 18px; background: var(--white); }
+.portfolio-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); margin-bottom: 5px; }
+.portfolio-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 16px; color: var(--black); letter-spacing: -0.01em; margin-bottom: 10px; }
+.portfolio-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--light); padding-bottom: 2px; transition: border-color 0.2s; }
+.portfolio-link:hover { border-color: var(--black); }
 
-.card-restaurant { background: #1a0f08; } .card-restaurant .portfolio-bg { color: #b8963e; }
-.card-barbershop { background: #080808; } .card-barbershop .portfolio-bg { color: #c8a830; }
-.card-fahrschule { background: #0a1628; } .card-fahrschule .portfolio-bg { color: #4488ff; }
-.card-zahnarzt { background: #e8eef4; } .card-zahnarzt .portfolio-bg { color: #4a7fa0; font-size: 56px; }
-.card-fitness { background: #0f0f0f; } .card-fitness .portfolio-bg { color: #ff4422; }
-.card-salon { background: #2a1a1a; } .card-salon .portfolio-bg { color: #c8887a; }
-.card-immobilien { background: #0f1a0f; } .card-immobilien .portfolio-bg { color: #4a8a4a; }
-.card-elektro { background: #1a1500; } .card-elektro .portfolio-bg { color: #F5B800; }
+.card-restaurant .portfolio-thumb { background: #1a0f08; } .card-restaurant .portfolio-thumb-logo { color: #b8963e; } .card-restaurant .portfolio-thumb-bg { color: #b8963e; }
+.card-barbershop .portfolio-thumb { background: #080808; } .card-barbershop .portfolio-thumb-logo { color: #c8a830; } .card-barbershop .portfolio-thumb-bg { color: #c8a830; }
+.card-fahrschule .portfolio-thumb { background: #0a1628; } .card-fahrschule .portfolio-thumb-logo { color: #4488ff; } .card-fahrschule .portfolio-thumb-bg { color: #4488ff; }
+.card-zahnarzt .portfolio-thumb { background: #e8eef4; } .card-zahnarzt .portfolio-thumb-logo { color: #4a7fa0; } .card-zahnarzt .portfolio-thumb-bg { color: #4a7fa0; }
+.card-fitness .portfolio-thumb { background: #0f0f0f; } .card-fitness .portfolio-thumb-logo { color: #ff4422; } .card-fitness .portfolio-thumb-bg { color: #ff4422; }
+.card-immobilien .portfolio-thumb { background: #0f1a0f; } .card-immobilien .portfolio-thumb-logo { color: #4a8a4a; } .card-immobilien .portfolio-thumb-bg { color: #4a8a4a; }
+.card-elektro .portfolio-thumb { background: #1a1500; } .card-elektro .portfolio-thumb-logo { color: #F5B800; } .card-elektro .portfolio-thumb-bg { color: #F5B800; }
 
 /* KONTAKT */
 #kontakt { background: var(--black); color: var(--white); }
@@ -285,83 +282,97 @@ footer { background: #060606; border-top: 1px solid rgba(255,255,255,0.04); padd
     <p class="section-desc">Jedes Projekt ist ein Unikat — designed für den jeweiligen Kunden, seine Branche und seine Zielgruppe.</p>
   </div>
   <div class="portfolio-grid reveal">
-    <div class="portfolio-card card-restaurant">
+    <a href="demo-restaurant.html" class="portfolio-card card-restaurant" target="_blank">
       <div class="portfolio-card-inner">
-        <div class="portfolio-bg">OV</div>
-        <div class="portfolio-overlay"></div>
-        <div class="portfolio-info">
+        <div class="portfolio-thumb">
+          <div class="portfolio-thumb-bg">OV</div>
+          <div class="portfolio-thumb-logo">Osteria<br>Venezia</div>
+        </div>
+        <div class="portfolio-body">
           <div class="portfolio-tag">Restaurant · Fine Dining</div>
           <div class="portfolio-name">Osteria Venezia</div>
-          <a href="demo-restaurant.html" class="portfolio-link" target="_blank">Projekt ansehen →</a>
+          <span class="portfolio-link">Projekt ansehen →</span>
         </div>
       </div>
-    </div>
-    <div class="portfolio-card card-barbershop">
+    </a>
+    <a href="demo-barbershop.html" class="portfolio-card card-barbershop" target="_blank">
       <div class="portfolio-card-inner">
-        <div class="portfolio-bg">CR</div>
-        <div class="portfolio-overlay"></div>
-        <div class="portfolio-info">
+        <div class="portfolio-thumb">
+          <div class="portfolio-thumb-bg">CR</div>
+          <div class="portfolio-thumb-logo">CROWN<br>Barbershop</div>
+        </div>
+        <div class="portfolio-body">
           <div class="portfolio-tag">Barbershop · Booking</div>
           <div class="portfolio-name">CROWN Barbershop</div>
-          <a href="demo-barbershop.html" class="portfolio-link" target="_blank">Projekt ansehen →</a>
+          <span class="portfolio-link">Projekt ansehen →</span>
         </div>
       </div>
-    </div>
-    <div class="portfolio-card card-fahrschule">
+    </a>
+    <a href="demo-fahrschule.html" class="portfolio-card card-fahrschule" target="_blank">
       <div class="portfolio-card-inner">
-        <div class="portfolio-bg">DU</div>
-        <div class="portfolio-overlay"></div>
-        <div class="portfolio-info">
+        <div class="portfolio-thumb">
+          <div class="portfolio-thumb-bg">DU</div>
+          <div class="portfolio-thumb-logo">DriveUp<br>Fahrschule</div>
+        </div>
+        <div class="portfolio-body">
           <div class="portfolio-tag">Fahrschule · Lead Gen</div>
           <div class="portfolio-name">DriveUp Fahrschule</div>
-          <a href="demo-fahrschule.html" class="portfolio-link" target="_blank">Projekt ansehen →</a>
+          <span class="portfolio-link">Projekt ansehen →</span>
         </div>
       </div>
-    </div>
-    <div class="portfolio-card card-zahnarzt">
+    </a>
+    <a href="demo-zahnarzt.html" class="portfolio-card card-zahnarzt" target="_blank">
       <div class="portfolio-card-inner">
-        <div class="portfolio-bg">DS</div>
-        <div class="portfolio-overlay"></div>
-        <div class="portfolio-info">
+        <div class="portfolio-thumb">
+          <div class="portfolio-thumb-bg">DS</div>
+          <div class="portfolio-thumb-logo" style="color:#4a7fa0">Dr.<br>Steinberg</div>
+        </div>
+        <div class="portfolio-body">
           <div class="portfolio-tag">Zahnarztpraxis · Medizin</div>
           <div class="portfolio-name">Dr. Steinberg</div>
-          <a href="demo-zahnarzt.html" class="portfolio-link" target="_blank">Projekt ansehen →</a>
+          <span class="portfolio-link">Projekt ansehen →</span>
         </div>
       </div>
-    </div>
-    <div class="portfolio-card card-fitness">
+    </a>
+    <a href="demo-fitness.html" class="portfolio-card card-fitness" target="_blank">
       <div class="portfolio-card-inner">
-        <div class="portfolio-bg">FG</div>
-        <div class="portfolio-overlay"></div>
-        <div class="portfolio-info">
+        <div class="portfolio-thumb">
+          <div class="portfolio-thumb-bg">FG</div>
+          <div class="portfolio-thumb-logo">FORGE<br>Fitness</div>
+        </div>
+        <div class="portfolio-body">
           <div class="portfolio-tag">Fitness · Premium Gym</div>
           <div class="portfolio-name">FORGE Fitness</div>
-          <a href="demo-fitness.html" class="portfolio-link" target="_blank">Projekt ansehen →</a>
+          <span class="portfolio-link">Projekt ansehen →</span>
         </div>
       </div>
-    </div>
-    <div class="portfolio-card card-immobilien">
+    </a>
+    <a href="demo-immobilien.html" class="portfolio-card card-immobilien" target="_blank">
       <div class="portfolio-card-inner">
-        <div class="portfolio-bg">IM</div>
-        <div class="portfolio-overlay"></div>
-        <div class="portfolio-info">
+        <div class="portfolio-thumb">
+          <div class="portfolio-thumb-bg">IM</div>
+          <div class="portfolio-thumb-logo">Demo<br>Immobilien</div>
+        </div>
+        <div class="portfolio-body">
           <div class="portfolio-tag">Immobilien · Makler</div>
           <div class="portfolio-name">Demo Immobilien</div>
-          <a href="demo-immobilien.html" class="portfolio-link" target="_blank">Projekt ansehen →</a>
+          <span class="portfolio-link">Projekt ansehen →</span>
         </div>
       </div>
-    </div>
-    <div class="portfolio-card card-elektro">
+    </a>
+    <a href="angelidis-elektrotechnik.html" class="portfolio-card card-elektro" target="_blank">
       <div class="portfolio-card-inner">
-        <div class="portfolio-bg">AE</div>
-        <div class="portfolio-overlay"></div>
-        <div class="portfolio-info">
+        <div class="portfolio-thumb">
+          <div class="portfolio-thumb-bg">AE</div>
+          <div class="portfolio-thumb-logo">Angelidis<br>Elektrotechnik</div>
+        </div>
+        <div class="portfolio-body">
           <div class="portfolio-tag">Elektrotechnik · Handwerk</div>
           <div class="portfolio-name">Angelidis Elektrotechnik</div>
-          <a href="angelidis-elektrotechnik.html" class="portfolio-link" target="_blank">Projekt ansehen →</a>
+          <span class="portfolio-link">Projekt ansehen →</span>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </section>
 
